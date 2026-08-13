@@ -1,0 +1,49 @@
+<svg width="1856" height="766" viewBox="0 0 1856 766" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="lime" x1="928" y1="0" x2="928" y2="766" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D5FF2A"/>
+      <stop offset="1" stop-color="#9FD400"/>
+    </linearGradient>
+    <linearGradient id="steel" x1="929" y1="84" x2="929" y2="640" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F4F7FA"/>
+      <stop offset="0.18" stop-color="#D5DAE0"/>
+      <stop offset="0.5" stop-color="#8C949E"/>
+      <stop offset="0.78" stop-color="#E4E8EC"/>
+      <stop offset="1" stop-color="#B0B8C1"/>
+    </linearGradient>
+    <linearGradient id="darkSteel" x1="928" y1="80" x2="928" y2="686" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#14181C"/>
+      <stop offset="1" stop-color="#040506"/>
+    </linearGradient>
+    <filter id="shadow" x="0" y="0" width="1856" height="766" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#000" flood-opacity="0.55"/>
+    </filter>
+  </defs>
+  <g filter="url(#shadow)">
+    <path d="M210 624L284 86H669L930 10L1194 86H1607L1673 624H210Z" fill="url(#darkSteel)" stroke="url(#lime)" stroke-width="22"/>
+    <path d="M929 32L1558 242H1390L1269 138H587L464 242H298L929 32Z" fill="#101214" stroke="url(#lime)" stroke-width="18"/>
+    <path d="M828 95H1031V203H828V95Z" fill="#DAFF21" stroke="#111" stroke-width="10"/>
+    <path d="M874 95V203" stroke="#111" stroke-width="10"/>
+    <path d="M930 95V203" stroke="#111" stroke-width="10"/>
+    <path d="M985 95V203" stroke="#111" stroke-width="10"/>
+    <path d="M828 149H1031" stroke="#111" stroke-width="10"/>
+
+    <g transform="translate(120 132)">
+      <path d="M0 445L78 16H262L231 171H404L436 16H620L540 445H356L391 263H214L179 445H0Z" fill="url(#steel)" stroke="#101214" stroke-width="14"/>
+      <path d="M16 457L93 28H278" stroke="url(#lime)" stroke-width="10"/>
+    </g>
+
+    <g transform="translate(642 132)">
+      <path d="M0 445L78 16H319C396 16 453 36 490 77C527 118 540 171 528 235C516 299 479 350 416 389C354 427 278 445 190 445H0ZM185 352C242 352 286 342 317 321C349 299 369 269 377 229C385 192 377 163 353 144C329 124 291 114 239 114H223L181 352H185Z" fill="url(#steel)" stroke="#101214" stroke-width="14"/>
+      <path d="M13 457L90 28H337" stroke="url(#lime)" stroke-width="10"/>
+    </g>
+
+    <g transform="translate(1126 132)">
+      <path d="M0 445L78 16H243L363 213L551 16H725L648 445H464L504 212L355 357H289L194 212L154 445H0Z" fill="url(#steel)" stroke="#101214" stroke-width="14"/>
+      <path d="M14 457L91 28H257" stroke="url(#lime)" stroke-width="10"/>
+    </g>
+
+    <path d="M250 654C543 718 1320 718 1606 654" stroke="url(#lime)" stroke-width="18" stroke-linecap="round"/>
+    <path d="M1740 99H1810V305H1740V99Z" fill="url(#steel)" stroke="#111" stroke-width="12"/>
+  </g>
+</svg>

@@ -1,0 +1,31 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="glow" x1="256" y1="48" x2="256" y2="480" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D7FF25"/>
+      <stop offset="1" stop-color="#96C900"/>
+    </linearGradient>
+    <radialGradient id="lens" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(256 272) rotate(90) scale(164 202)">
+      <stop stop-color="#D8FF2A"/>
+      <stop offset="1" stop-color="#3A5B00"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="110" fill="#07110D"/>
+  <path d="M127 90C92 58 71 43 57 44C41 46 31 62 35 80C38 94 57 110 94 144" stroke="#161616" stroke-width="22" stroke-linecap="round"/>
+  <path d="M385 90C420 58 441 43 455 44C471 46 481 62 477 80C474 94 455 110 418 144" stroke="#161616" stroke-width="22" stroke-linecap="round"/>
+  <path d="M116 149C155 119 203 102 256 102C309 102 357 119 396 149L374 216H138L116 149Z" fill="#0A0C0D" stroke="url(#glow)" stroke-width="14"/>
+  <path d="M225 122H288L332 151H181L225 122Z" fill="#0D1511"/>
+  <path d="M246 116H266L304 142H208L246 116Z" fill="#D7FF25"/>
+  <path d="M145 204C174 175 211 160 256 160C301 160 338 175 367 204L347 262H165L145 204Z" fill="#121212"/>
+  <path d="M132 258C154 221 194 196 252 196C315 196 356 222 380 261C364 340 319 405 256 405C193 405 148 340 132 258Z" fill="#F2B60A"/>
+  <path d="M134 257C168 216 207 196 251 196C302 196 344 219 379 260C358 273 330 279 295 279C233 279 175 271 134 257Z" fill="#FFC800"/>
+  <path d="M164 255C186 222 215 206 252 206C289 206 318 222 340 255C322 277 294 290 256 290C218 290 186 278 164 255Z" fill="#090909"/>
+  <path d="M116 244C141 218 173 205 214 205C247 205 279 213 309 230L286 317C253 328 220 329 188 320L116 244Z" fill="url(#lens)" stroke="#080808" stroke-width="10"/>
+  <path d="M398 244C373 218 341 205 300 205C267 205 235 213 205 230L228 317C261 328 294 329 326 320L398 244Z" fill="url(#lens)" stroke="#080808" stroke-width="10"/>
+  <path d="M149 239C185 249 221 254 257 254C292 254 327 249 362 239" stroke="#151515" stroke-width="11" stroke-linecap="round"/>
+  <path d="M172 347C196 374 224 387 256 387C288 387 316 374 340 347C319 332 291 324 256 324C221 324 193 332 172 347Z" fill="#fff" stroke="#0D0D0D" stroke-width="9"/>
+  <path d="M183 359H329" stroke="#0D0D0D" stroke-width="5"/>
+  <path d="M198 336L190 381M224 330L220 385M256 327V387M288 330L292 385M314 336L322 381" stroke="#0D0D0D" stroke-width="4"/>
+  <path d="M176 181C190 155 208 142 232 142C223 171 208 188 184 193L176 181Z" fill="#F8C400"/>
+  <path d="M336 181C322 155 304 142 280 142C289 171 304 188 328 193L336 181Z" fill="#F8C400"/>
+  <text x="256" y="189" text-anchor="middle" fill="#D7FF25" font-family="Arial Black, Arial, sans-serif" font-size="58" font-weight="900" transform="rotate(-8 256 189)">HDM</text>
+</svg>
