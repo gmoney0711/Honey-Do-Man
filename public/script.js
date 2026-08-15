@@ -180,21 +180,35 @@ function renderPricing(){
   $$('.js-checkout').forEach((btn) => btn.addEventListener('click', onCheckoutClick));
 }
 
-function onCheckoutClick(e){
+async function onCheckoutClick(e){
   const btn = e.currentTarget;
   if (btn.classList.contains('is-loading')) return;
   const plan = btn.dataset.plan;
   const note = $(`[data-note-for="${plan}"]`);
   btn.classList.add('is-loading');
   btn.disabled = true;
-  setTimeout(() => {
+
+  try {
+    const res = await fetch('/api/stripe/checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ plan }),
+    });
+
+    const data = await res.json();
+    if (!res.ok || !data?.url) {
+      throw new Error(data?.error || 'Unable to start checkout.');
+    }
+
+    window.location.href = data.url;
+  } catch (err) {
     btn.classList.remove('is-loading');
     btn.disabled = false;
     if (note) {
-      note.textContent = `Stripe checkout connects here - /checkout/${plan}`;
-      note.style.color = 'var(--accent)';
+      note.textContent = err instanceof Error ? err.message : 'Checkout failed. Please try again.';
+      note.style.color = 'var(--danger)';
     }
-  }, 900);
+  }
 }
 
 function renderOneTime(){
