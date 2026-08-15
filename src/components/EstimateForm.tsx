@@ -61,6 +61,41 @@ export function EstimateForm() {
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState<FormState>(initialState);
 
+  const estimateSummary = useMemo(() => {
+    const services = form.services.length > 0 ? form.services.join(", ") : "Not provided";
+    const photos = form.files.length > 0 ? form.files.map((file) => file.name).join(", ") : "None";
+
+    return [
+      "New HDM Estimate Request",
+      "",
+      `Name: ${form.firstName || ""} ${form.lastName || ""}`.trim(),
+      `Phone: ${form.phone || "Not provided"}`,
+      `Email: ${form.email || "Not provided"}`,
+      "",
+      `Service needed: ${services}`,
+      `Address: ${form.address || "Not provided"}`,
+      `City/State/ZIP: ${form.city || "-"}, ${form.state || "-"} ${form.zip || "-"}`,
+      `Property type: ${form.propertyType || "Not provided"}`,
+      `Property size: ${form.propertySize || "Not provided"}`,
+      `Preferred contact: ${form.contactMethod || "Not provided"}`,
+      `Preferred time: ${form.preferredTime || "Not provided"}`,
+      `Photos attached: ${photos}`,
+      "",
+      `Project details: ${form.details || "Not provided"}`,
+    ].join("\n");
+  }, [form]);
+
+  const sendByTextHref = useMemo(
+    () => `sms:+13463607235?body=${encodeURIComponent(estimateSummary)}`,
+    [estimateSummary]
+  );
+
+  const sendByEmailHref = useMemo(
+    () =>
+      `mailto:HoneyDoMan.Contact@gmail.com?subject=${encodeURIComponent("New HDM Estimate Request")}&body=${encodeURIComponent(estimateSummary)}`,
+    [estimateSummary]
+  );
+
   const canContinue = useMemo(() => {
     switch (step) {
       case 1:
@@ -112,8 +147,11 @@ export function EstimateForm() {
             Your HDM request is in. We&apos;ll review the details and get back to you shortly.
           </p>
           <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center">
-            <a href="tel:+1-346-360-7235" className="cta-primary">
-              CALL HDM
+            <a href={sendByTextHref} className="cta-primary">
+              SEND BY TEXT
+            </a>
+            <a href={sendByEmailHref} className="cta-secondary">
+              SEND BY EMAIL
             </a>
             <a href="#top" className="cta-secondary">
               BACK TO HOME

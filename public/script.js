@@ -101,6 +101,8 @@ const EF_CONTACT = [
   { key:'email', label:'Email', icon:'mail' },
 ];
 const EF_TIMES = ['Morning','Afternoon','Evening'];
+const HDM_ESTIMATE_PHONE = '+13463607235';
+const HDM_ESTIMATE_EMAIL = 'HoneyDoMan.Contact@gmail.com';
 
 const $ = (sel, el=document) => el.querySelector(sel);
 const $$ = (sel, el=document) => Array.from(el.querySelectorAll(sel));
@@ -475,6 +477,63 @@ function showStep(n){
   nextBtn.querySelector('.btn-label').textContent = n === EF_TOTAL_STEPS ? 'REQUEST MY FREE ESTIMATE ->' : 'CONTINUE ->';
 }
 
+function formatEstimateSummary(){
+  const need = EF_NEEDS.find((item) => item.key === efState.need)?.label || 'Not provided';
+  const contact = EF_CONTACT.find((item) => item.key === efState.contact)?.label || 'Not provided';
+  const photos = efState.photos.length ? efState.photos.join(', ') : 'None';
+
+  return [
+    'New HDM Estimate Request',
+    '',
+    `Name: ${efState.firstName || ''} ${efState.lastName || ''}`.trim(),
+    `Phone: ${efState.phone || 'Not provided'}`,
+    `Email: ${efState.email || 'Not provided'}`,
+    '',
+    `Service needed: ${need}`,
+    `Address: ${efState.address || 'Not provided'}`,
+    `City/State/ZIP: ${efState.city || '-'}, ${efState.state || '-'} ${efState.zip || '-'}`,
+    `Property type: ${efState.propertyType || 'Not provided'}`,
+    `Property size: ${efState.size || 'Not provided'}`,
+    `Preferred contact: ${contact}`,
+    `Preferred time: ${efState.time || 'Not provided'}`,
+    `Photos attached: ${photos}`,
+    '',
+    `Project details: ${efState.details || 'Not provided'}`,
+  ].join('\n');
+}
+
+function configureEstimateDeliveryLinks(){
+  const ctas = $('#efSuccess .estimate-shell-ctas');
+  if (!ctas) return;
+
+  const message = formatEstimateSummary();
+  const encodedMessage = encodeURIComponent(message);
+  const encodedSubject = encodeURIComponent('New HDM Estimate Request');
+
+  const textLink = ctas.querySelector('a.btn.btn-primary');
+  if (textLink) {
+    textLink.id = 'efSendText';
+    textLink.textContent = 'Send by Text';
+    textLink.href = `sms:${HDM_ESTIMATE_PHONE}?body=${encodedMessage}`;
+  }
+
+  let emailLink = $('#efSendEmail');
+  if (!emailLink) {
+    emailLink = document.createElement('a');
+    emailLink.id = 'efSendEmail';
+    emailLink.className = 'btn btn-ghost';
+    emailLink.textContent = 'Send by Email';
+    const backToHome = $('#backToHome');
+    if (backToHome) {
+      ctas.insertBefore(emailLink, backToHome);
+    } else {
+      ctas.appendChild(emailLink);
+    }
+  }
+
+  emailLink.href = `mailto:${HDM_ESTIMATE_EMAIL}?subject=${encodedSubject}&body=${encodedMessage}`;
+}
+
 function wireNav(){
   const next = $('#efNext');
   const back = $('#efBack');
@@ -501,6 +560,7 @@ function submitEstimate(){
   btn.classList.add('is-loading');
   btn.disabled = true;
   setTimeout(() => {
+    configureEstimateDeliveryLinks();
     btn.classList.remove('is-loading');
     btn.disabled = false;
     $('#efForm').style.display = 'none';
