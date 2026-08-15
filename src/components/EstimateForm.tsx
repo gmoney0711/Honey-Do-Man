@@ -144,7 +144,7 @@ export function EstimateForm() {
           <p className="text-xs font-bold tracking-[0.18em] text-hdm-muted">ESTIMATE REQUEST</p>
           <h2 className="mt-4 text-4xl font-black text-hdm-text md:text-5xl">REQUEST RECEIVED.</h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-hdm-muted">
-            Your HDM request is in. We&apos;ll review the details and get back to you shortly.
+            Your estimate is ready. Choose one option below to send it now: Send by Text to 346-360-7235 or Send by Email to HoneyDoMan.Contact@gmail.com.
           </p>
           <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center">
             <a href={sendByTextHref} className="cta-primary">

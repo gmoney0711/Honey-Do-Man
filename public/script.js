@@ -506,6 +506,11 @@ function configureEstimateDeliveryLinks(){
   const ctas = $('#efSuccess .estimate-shell-ctas');
   if (!ctas) return;
 
+  const successCopy = $('#efSuccess p');
+  if (successCopy) {
+    successCopy.textContent = 'Your estimate is ready. Choose one option below to send it now: Send by Text to 346-360-7235 or Send by Email to HoneyDoMan.Contact@gmail.com.';
+  }
+
   const message = formatEstimateSummary();
   const encodedMessage = encodeURIComponent(message);
   const encodedSubject = encodeURIComponent('New HDM Estimate Request');
