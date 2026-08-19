@@ -47,7 +47,7 @@ export function MembershipPricing() {
                 ))}
               </ul>
 
-              <CheckoutButton href={plan.href} label={plan.cta} className="cta-primary w-full text-center" />
+              <CheckoutButton href={plan.href} plan={plan.plan} label={plan.cta} className="cta-primary w-full text-center" />
             </article>
           ))}
         </div>

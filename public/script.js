@@ -40,11 +40,208 @@ const SERVICES = [
   { icon:'home', name:'Home Maintenance', desc:'Ongoing upkeep so small issues never turn into big ones.' },
 ];
 
-const PLANS = [
-  { id:'care', name:'HDM Care', price:99, popular:false, features:['Lawn maintenance','Trimming & edging','Basic yard cleanup','Monthly HVAC filter replacement','Priority scheduling','Member pricing'], cta:'Start Care Plan' },
-  { id:'home', name:'HDM Home', price:199, popular:true, features:['Everything in Care','Pressure washing','Gutter cleaning','Seasonal cleanup','Minor handyman tasks','Priority service'], cta:'Start Home Plan' },
-  { id:'total', name:'HDM Total', price:299, popular:false, features:['Everything in Home','Larger recurring maintenance','Exterior property maintenance','Seasonal property inspection','Priority scheduling','Best member pricing'], cta:'Start Total Plan' },
-];
+const MEMBERSHIP = {
+  intro: {
+    eyebrow: 'Memberships',
+    title: 'Put Your Home On Autopilot.',
+    copy: 'Monthly home and property maintenance designed to catch small problems early, keep your home maintained, and take the Honey-Do list off your plate.',
+    disclaimer: 'Membership services are subject to the applicable plan\'s service limits and membership agreement. Larger repairs, specialty work, materials, and work outside the included scope are quoted separately.',
+  },
+  cards: [
+    {
+      id: 'care',
+      name: 'HDM CARE',
+      price: '$99',
+      tier: 'BASIC CARE',
+      badge: 'ENTRY POINT',
+      tagline: 'We watch your home.',
+      summary: 'A monthly home and property checkup designed to catch small problems before they become bigger headaches.',
+      checkoutLabel: 'PAY WITH CARD',
+      cta: 'START WITH HDM CARE',
+      accent: 'lime',
+      featured: false,
+      highlights: ['Monthly home checkup', 'HVAC filter service', 'Plumbing/leak checks', 'Lighting & safety checks', 'Exterior home check'],
+      groups: [
+        {
+          title: 'HVAC CARE',
+          icon: 'home',
+          items: ['HVAC filter check', 'HVAC filter replacement', 'Record filter size', 'Check thermostat appears operational', 'Check accessible vents for obvious blockage or damage', 'Scheduled annual HVAC maintenance/cleaning within HDM\'s defined service scope'],
+        },
+        {
+          title: 'PLUMBING CHECK',
+          icon: 'gutter',
+          items: ['Check kitchen faucet for visible leaks/drips', 'Check bathroom faucets for visible leaks/drips', 'Check accessible areas underneath sinks for moisture/leaks', 'Check toilets for continuous running or visible leaks', 'Check exterior faucets/spigots', 'Check attached hoses', 'Check hose connections/nozzles for visible leaks'],
+        },
+        {
+          title: 'LIGHTS & BASIC SAFETY',
+          icon: 'star',
+          items: ['Check accessible interior lights', 'Check accessible exterior lights', 'Replace approved basic burned-out bulbs when appropriate', 'Check accessible switches for obvious damage', 'Check accessible outlets for visible damage', 'Test accessible smoke detectors', 'Test accessible CO detectors when present'],
+        },
+        {
+          title: 'EXTERIOR HOME CHECK',
+          icon: 'home',
+          items: ['Accessible exterior walk-around', 'Exterior doors', 'Gates', 'Visible siding/brick condition', 'Exterior trim', 'Obvious water damage', 'Drainage/standing water concerns', 'Gutters/downspouts visually checked from ground level', 'Exterior lights', 'Obvious trip hazards', 'Reasonable small debris pickup'],
+        },
+        {
+          title: 'BASIC PREVENTATIVE MAINTENANCE',
+          icon: 'wrench',
+          items: ['Tighten simple loose handles/hardware when appropriate', 'Address simple maintenance items within HDM\'s defined scope', 'Photograph problems requiring additional work'],
+        },
+      ],
+      report: ['GOOD', 'KEEP AN EYE ON IT', 'NEEDS ATTENTION'],
+      note: 'HDM Home Condition Reports create a continuing record of what HDM has observed and maintained during each visit.',
+      footerNote: 'Membership services are subject to the applicable plan\'s service limits and membership agreement. Larger repairs, specialty work, materials, and work outside the included scope are quoted separately.',
+    },
+    {
+      id: 'home',
+      name: 'HDM HOME',
+      price: '$199',
+      tier: 'BEST VALUE',
+      badge: 'MOST POPULAR',
+      tagline: 'We watch it AND maintain it.',
+      summary: 'Everything included in HDM CARE, plus additional interior and exterior home maintenance and included Honey-Do time.',
+      checkoutLabel: 'PAY WITH CARD',
+      cta: 'CHOOSE HDM HOME',
+      accent: 'accent',
+      featured: true,
+      highlights: ['Everything in Care', 'Home maintenance', '30 minutes included', 'Doors/windows/hardware', 'Home upkeep'],
+      groups: [
+        {
+          title: 'EVERYTHING IN HDM CARE',
+          icon: 'check',
+          items: ['Monthly home and property checkup', 'HVAC filter service', 'Plumbing/leak checks', 'Lighting & basic safety checks', 'Exterior home check', 'Basic preventative maintenance', 'Home condition documentation'],
+        },
+        {
+          title: 'DOORS, WINDOWS & HARDWARE',
+          icon: 'home',
+          items: ['Accessible interior door checks', 'Exterior door checks', 'Check for sticking/squeaking doors', 'Lubricate appropriate hinges when needed', 'Tighten simple handles/hardware', 'Cabinet doors/handles', 'Visible weather stripping', 'Accessible caulking condition', 'Accessible windows/screens for obvious problems'],
+        },
+        {
+          title: 'INTERIOR HOME MAINTENANCE',
+          icon: 'wrench',
+          items: ['Ceiling fan visual checks', 'Garbage disposal operation check when present', 'Accessible dishwasher/filter visual check', 'Washing-machine hose/connection visual check', 'Dryer vent connection visual check', 'Refrigerator water connection visual check when present', 'Visible moisture/water staining', 'Wall/ceiling conditions that should be monitored'],
+        },
+        {
+          title: 'HOME UPKEEP',
+          icon: 'broom',
+          items: ['Spot-clean designated wall scuffs', 'Wipe designated baseboards', 'Wipe dirty door/door-frame areas', 'Wipe designated switches/common touch surfaces', 'Remove accessible porch/exterior cobwebs'],
+        },
+        {
+          title: 'EXTERIOR PROPERTY UPKEEP',
+          icon: 'spray',
+          items: ['Basic property cleanup', 'Reasonable sticks/debris pickup', 'Blow off designated porch/walkway when appropriate', 'Fence/gate checks', 'Exterior fixture checks', 'Drainage/property concern documentation'],
+        },
+        {
+          title: 'INCLUDED HONEY-DO TIME',
+          icon: 'clock',
+          items: ['Up to 30 minutes of approved minor Honey-Do work per visit', 'Small hardware adjustments', 'Minor maintenance tasks', 'Simple upkeep tasks', 'Other approved tasks within HDM\'s service scope'],
+        },
+      ],
+      report: ['GOOD', 'KEEP AN EYE ON IT', 'NEEDS ATTENTION'],
+      note: 'Honey-Do time applies only to approved minor tasks within HDM\'s defined service scope. Larger repairs, specialty work, materials, and work exceeding included time are quoted separately.',
+      footerNote: 'Do not describe HDM HOME as unlimited handyman labor. Honey-Do time is limited to approved minor tasks within HDM\'s defined service scope.',
+    },
+    {
+      id: 'total',
+      name: 'HDM TOTAL',
+      price: '$299',
+      tier: 'PREMIUM',
+      badge: 'PREMIUM HOME CARE',
+      tagline: 'Complete home care.',
+      summary: 'The highest level of HDM membership for homeowners who want more comprehensive monitoring, preventative maintenance, and included Honey-Do time.',
+      checkoutLabel: 'PAY WITH CARD',
+      cta: 'GO TOTAL',
+      accent: 'gold',
+      featured: false,
+      highlights: ['Everything in Care', 'Everything in Home', '60 minutes included', 'Complete Home Health Check', 'Annual HVAC maintenance'],
+      groups: [
+        {
+          title: 'EVERYTHING IN HDM CARE',
+          icon: 'check',
+          items: ['Monthly home and property checkup', 'HVAC filter service', 'Plumbing/leak checks', 'Lighting & basic safety checks', 'Exterior home check', 'Basic preventative maintenance', 'Home condition documentation'],
+        },
+        {
+          title: 'EVERYTHING IN HDM HOME',
+          icon: 'check',
+          items: ['Doors/windows/hardware checks', 'Interior upkeep', 'Exterior property upkeep', 'Included Honey-Do time', 'Priority attention to previous problem areas'],
+        },
+        {
+          title: 'HDM HOME HEALTH CHECK',
+          icon: 'star',
+          items: ['INTERIOR: Visible ceiling/wall water staining', 'INTERIOR: Accessible under-sink areas', 'INTERIOR: Toilets/faucets', 'INTERIOR: Visible plumbing connections', 'INTERIOR: Doors/hardware', 'INTERIOR: Accessible windows', 'INTERIOR: Visible caulking', 'INTERIOR: Ceiling fans', 'INTERIOR: Accessible lighting', 'INTERIOR: Smoke/CO detectors', 'INTERIOR: Unusual visible moisture/damage', 'INTERIOR: Previous problem areas', 'EXTERIOR: Full accessible perimeter walk', 'EXTERIOR: Exterior doors', 'EXTERIOR: Gates/fencing', 'EXTERIOR: Visible siding/brick', 'EXTERIOR: Visible exterior trim', 'EXTERIOR: Exterior caulking condition', 'EXTERIOR: Gutters/downspouts from ground level', 'EXTERIOR: Drainage/standing water', 'EXTERIOR: Exterior faucets', 'EXTERIOR: Hoses/nozzles', 'EXTERIOR: Exterior lights', 'EXTERIOR: Walkways/driveway for obvious hazards', 'EXTERIOR: Obvious property hazards', 'EXTERIOR: Previous problem areas'],
+        },
+        {
+          title: 'PREVENTATIVE MAINTENANCE',
+          icon: 'wrench',
+          items: ['HVAC filter service', 'Approved hardware tightening', 'Appropriate lubrication', 'Approved preventative maintenance', 'Scheduled seasonal maintenance', 'Previous problem follow-up', 'Documentation of developing concerns', 'Photo documentation'],
+        },
+        {
+          title: 'ANNUAL HVAC MAINTENANCE',
+          icon: 'home',
+          items: ['HDM performs scheduled annual HVAC maintenance/cleaning within the defined HDM service scope.'],
+        },
+        {
+          title: 'INCLUDED HONEY-DO TIME',
+          icon: 'clock',
+          items: ['Up to 60 minutes of approved minor Honey-Do work per visit', 'Your HDM technician can use up to 60 minutes of each visit for approved minor maintenance tasks within the membership scope.', 'Larger repairs, specialty work, materials, and work outside the included scope are quoted separately.'],
+        },
+      ],
+      report: ['GOOD', 'KEEP AN EYE ON IT', 'NEEDS ATTENTION'],
+      note: 'Your HDM technician can use up to 60 minutes of each visit for approved minor maintenance tasks within the membership scope.',
+      footerNote: 'Do not treat this as a formal real-estate inspection or a licensed home inspection. This is an HDM Home Health Check, preventative home check, and maintenance & condition check within HDM\'s defined scope. Larger repairs, specialty work, materials, and work outside the included scope are quoted separately.',
+    },
+  ],
+  comparisonRows: [
+    { label: 'Monthly home checkup', care: '✓', home: '✓', total: '✓' },
+    { label: 'HVAC filter service', care: '✓', home: '✓', total: '✓' },
+    { label: 'Scheduled annual HVAC maintenance', care: '✓', home: '✓', total: '✓' },
+    { label: 'Plumbing/leak checks', care: '✓', home: '✓', total: '✓' },
+    { label: 'Lighting & safety checks', care: '✓', home: '✓', total: '✓' },
+    { label: 'Exterior home check', care: '✓', home: '✓', total: '✓' },
+    { label: 'Basic property cleanup', care: '✓', home: '✓', total: '✓' },
+    { label: 'Home maintenance', care: '—', home: '✓', total: '✓' },
+    { label: 'Doors/windows/hardware', care: '—', home: '✓', total: '✓' },
+    { label: 'Interior upkeep', care: '—', home: '✓', total: '✓' },
+    { label: 'Exterior upkeep', care: '—', home: '✓', total: '✓' },
+    { label: 'Honey-Do time', care: '—', home: '30 min', total: '60 min', emphasis: true },
+    { label: 'Comprehensive Home Health Check', care: '—', home: '—', total: '✓' },
+    { label: 'Preventative maintenance', care: '✓', home: '✓', total: '✓' },
+    { label: 'Seasonal maintenance', care: '—', home: '—', total: '✓' },
+    { label: 'Premium service level', care: '—', home: '—', total: '✓' },
+  ],
+  exclusions: [
+    'Major repairs',
+    'Specialty repairs',
+    'Major plumbing work',
+    'Electrical work outside HDM\'s permitted scope',
+    'HVAC repairs outside included maintenance',
+    'Refrigerant/service work when applicable',
+    'Structural repairs',
+    'Roofing repairs',
+    'Large landscaping projects',
+    'Major pressure washing projects',
+    'Materials outside included allowances',
+    'Projects exceeding included Honey-Do time',
+    'Work outside the membership\'s defined service area or scope',
+  ],
+  howItWorks: [
+    'HDM documents the issue.',
+    'HDM photographs it when appropriate.',
+    'HDM explains the issue to the homeowner.',
+    'HDM provides an estimate when needed.',
+    'HDM gets homeowner approval before performing additional work.',
+  ],
+  benefits: [
+    { title: 'Prevent', copy: 'Catch small problems before they become bigger headaches.' },
+    { title: 'Save Time', copy: 'Stop spending your weekends chasing the Honey-Do list.' },
+    { title: 'Plan Ahead', copy: 'Know what\'s happening around your home before it becomes an emergency.' },
+    { title: 'Peace of Mind', copy: 'Have a local HDM team keeping an eye on your property.' },
+  ],
+  finalCta: {
+    title: 'Ready to take the Honey-Do list off your plate?',
+    copy: 'Tell us about your home and we\'ll help you find the HDM membership that fits.',
+  },
+};
 
 const ONE_TIME = [
   { name:'Lawn Cleanup', price:'From $79' },
@@ -102,7 +299,7 @@ const EF_CONTACT = [
 ];
 const EF_TIMES = ['Morning','Afternoon','Evening'];
 const HDM_ESTIMATE_PHONE = '+13463607235';
-const HDM_ESTIMATE_EMAIL = 'HoneyDoMan.Contact@gmail.com';
+const HDM_ESTIMATE_EMAIL = 'honeydoman.service@outlook.com';
 
 const $ = (sel, el=document) => el.querySelector(sel);
 const $$ = (sel, el=document) => Array.from(el.querySelectorAll(sel));
@@ -165,21 +362,160 @@ function renderServices(){
   `).join('');
 }
 
-function renderPricing(){
-  const grid = $('#pricingGrid');
-  if (!grid) return;
-  grid.innerHTML = PLANS.map((p) => `
-    <div class="price-card ticket ${p.popular ? 'is-popular' : ''}" data-reveal="scale" data-plan="${p.id}">
-      ${p.popular ? `<span class="price-popular-badge">Most Popular</span>` : ''}
-      <div class="price-plan-name">${p.name}</div>
-      <div class="price-amount"><span class="num">$${p.price}</span><span class="per">/ month</span></div>
-      <ul class="price-features">${p.features.map((f) => `<li>${icon('check')}<span>${f}</span></li>`).join('')}</ul>
-      <button class="btn btn-primary btn-block js-checkout" data-plan="${p.id}"><span class="spin"></span><span class="btn-label">${p.cta.toUpperCase()} -></span></button>
-      <div class="price-note" data-note-for="${p.id}"></div>
-    </div>
-  `).join('');
+function renderMembership(){
+  const summary = $('#membershipSummary');
+  if (summary) {
+    summary.innerHTML = [
+      { label: '$99 / MONTH', copy: 'Basic care' },
+      { label: '$199 / MONTH', copy: 'Best value' },
+      { label: '$299 / MONTH', copy: 'Premium' },
+    ].map((item) => `
+      <div class="membership-summary-chip ticket" data-reveal>
+        <div class="membership-summary-label">${item.label}</div>
+        <div class="membership-summary-copy">${item.copy}</div>
+      </div>
+    `).join('');
+  }
 
-  $$('.js-checkout').forEach((btn) => btn.addEventListener('click', onCheckoutClick));
+  const grid = $('#membershipCards');
+  if (grid) {
+    grid.innerHTML = MEMBERSHIP.cards.map((plan, index) => `
+      <article class="membership-card ticket ${plan.featured ? 'is-featured' : ''} is-${plan.accent}" data-reveal="scale" style="transition-delay:${index * 70}ms">
+        <div class="membership-card-top">
+          <div class="membership-card-meta">
+            <span class="membership-tier">${plan.tier}</span>
+            ${plan.badge ? `<span class="membership-badge ${plan.featured ? 'featured' : ''}">${plan.badge}</span>` : ''}
+          </div>
+          <h3>${plan.name}</h3>
+          <p class="membership-tagline">${plan.tagline}</p>
+          <div class="membership-price"><span class="num">${plan.price}</span><span class="per">/ MONTH</span></div>
+          <p class="membership-copy">${plan.summary}</p>
+          <div class="membership-highlights">${plan.highlights.map((item) => `<span>${item}</span>`).join('')}</div>
+          <div class="membership-card-ctas">
+            <button type="button" class="btn btn-primary btn-block js-checkout" data-plan="${plan.id}">
+              <span class="spin"></span><span class="btn-label">${plan.checkoutLabel}</span>
+            </button>
+            <a href="#estimate" class="btn btn-ghost btn-block">${plan.cta}</a>
+            <a href="tel:${HDM_ESTIMATE_PHONE}" class="btn btn-ghost btn-block">CALL OR TEXT HDM</a>
+          </div>
+          <div class="price-note" data-note-for="${plan.id}">Secure Stripe checkout.</div>
+        </div>
+        <details class="membership-details">
+          <summary>VIEW EVERYTHING INCLUDED ↓</summary>
+          <div class="membership-details-inner">
+            <div class="membership-report">
+              <h4>HDM HOME CONDITION REPORT</h4>
+              <div class="membership-report-row">${plan.report.map((item, reportIndex) => `<span class="report-pill report-${reportIndex}">${item}</span>`).join('')}</div>
+              <p>${plan.note}</p>
+            </div>
+            ${plan.groups.map((group) => `
+              <div class="membership-group">
+                <div class="membership-group-title">${icon(group.icon)}<span>${group.title}</span></div>
+                <ul>${group.items.map((item) => `<li>${icon('check')}<span>${item}</span></li>`).join('')}</ul>
+              </div>
+            `).join('')}
+            <p class="membership-scope-note">${plan.footerNote}</p>
+          </div>
+        </details>
+      </article>
+    `).join('');
+
+    $$('.js-checkout').forEach((btn) => btn.addEventListener('click', onCheckoutClick));
+  }
+
+  const comparison = $('#membershipComparison');
+  if (comparison) {
+    comparison.innerHTML = `
+      <div class="membership-section-head" data-reveal>
+        <span class="eyebrow muted">What's the difference?</span>
+        <h2 class="h-display">Which HDM Membership Is Right For You?</h2>
+      </div>
+      <div class="membership-table-wrap ticket" data-reveal>
+        <table class="membership-table">
+          <thead>
+            <tr>
+              <th>Benefit</th>
+              <th>HDM CARE</th>
+              <th>HDM HOME</th>
+              <th>HDM TOTAL</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${MEMBERSHIP.comparisonRows.map((row) => `
+              <tr class="${row.emphasis ? 'is-emphasis' : ''}">
+                <th scope="row">${row.label}</th>
+                <td>${row.care}</td>
+                <td>${row.home}</td>
+                <td>${row.total}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    `;
+  }
+
+  const exclusions = $('#membershipExclusions');
+  if (exclusions) {
+    exclusions.innerHTML = `
+      <div class="membership-section-head" data-reveal>
+        <span class="eyebrow amber">What doesn't the membership cover?</span>
+        <h2 class="h-display">No Surprise Work.<br>No Unlimited Free Labor.</h2>
+        <p>Memberships are designed for recurring preventative maintenance and approved services included within each plan.</p>
+      </div>
+      <div class="membership-exclusions-grid">
+        <div class="membership-exclusions-card ticket" data-reveal>
+          <ul>
+            ${MEMBERSHIP.exclusions.map((item) => `<li>${icon('check')}<span>${item}</span></li>`).join('')}
+          </ul>
+        </div>
+        <div class="membership-approval ticket" data-reveal>
+          <div class="membership-approval-kicker">How it works</div>
+          <div class="membership-approval-flow">STOP → PHOTO → DOCUMENT → QUOTE → APPROVAL</div>
+          <ol>
+            ${MEMBERSHIP.howItWorks.map((item) => `<li>${item}</li>`).join('')}
+          </ol>
+        </div>
+      </div>
+    `;
+  }
+
+  const why = $('#membershipWhy');
+  if (why) {
+    why.innerHTML = `
+      <div class="membership-section-head" data-reveal>
+        <span class="eyebrow">Why membership?</span>
+        <h2 class="h-display">Why Put Your Home On Autopilot?</h2>
+      </div>
+      <div class="membership-benefits-grid">
+        ${MEMBERSHIP.benefits.map((benefit, index) => `
+          <div class="membership-benefit ticket" data-reveal style="transition-delay:${index * 60}ms">
+            <div class="membership-benefit-title">${benefit.title}</div>
+            <p>${benefit.copy}</p>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }
+
+  const finalCta = $('#membershipFinalCta');
+  if (finalCta) {
+    finalCta.innerHTML = `
+      <div class="membership-final ticket" data-reveal="scale">
+        <div class="membership-final-copy">
+          <span class="eyebrow">Start here</span>
+          <h2 class="h-display">${MEMBERSHIP.finalCta.title}</h2>
+          <p>${MEMBERSHIP.finalCta.copy}</p>
+        </div>
+        <div class="membership-final-ctas">
+          <a href="#estimate" class="btn btn-primary">GET MY FREE HDM PROPERTY CHECK</a>
+          <a href="tel:${HDM_ESTIMATE_PHONE}" class="btn btn-ghost">CALL OR TEXT HDM</a>
+          <a href="mailto:${HDM_ESTIMATE_EMAIL}" class="btn btn-dark">EMAIL HDM</a>
+          <span class="membership-final-meta">honeydoman.co</span>
+        </div>
+      </div>
+    `;
+  }
 }
 
 async function onCheckoutClick(e){
@@ -508,7 +844,7 @@ function configureEstimateDeliveryLinks(){
 
   const successCopy = $('#efSuccess p');
   if (successCopy) {
-    successCopy.textContent = 'Your estimate is ready. Choose one option below to send it now: Send by Text to 346-360-7235 or Send by Email to HoneyDoMan.Contact@gmail.com.';
+    successCopy.textContent = 'Your estimate is ready. Choose one option below to send it now: Send by Text to 346-360-7235 or Send by Email to honeydoman.service@outlook.com.';
   }
 
   const message = formatEstimateSummary();
@@ -588,7 +924,7 @@ function resetEstimateForm(){
 
 function initSite(){
   renderServices();
-  renderPricing();
+  renderMembership();
   renderOneTime();
   renderPresale();
   renderArea();

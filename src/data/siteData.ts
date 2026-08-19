@@ -1,4 +1,5 @@
 import { checkoutRoutes } from "@/lib/checkout";
+import type { CheckoutPlan } from "@/lib/checkout";
 
 export type ServiceItem = {
   title: string;
@@ -7,6 +8,7 @@ export type ServiceItem = {
 };
 
 export type PlanItem = {
+  plan: CheckoutPlan;
   name: string;
   price: string;
   period: string;
@@ -99,6 +101,7 @@ export const problemCards = [
 
 export const plans: PlanItem[] = [
   {
+    plan: "care",
     name: "HDM CARE",
     price: "$99",
     period: "/ MONTH",
@@ -114,6 +117,7 @@ export const plans: PlanItem[] = [
     ],
   },
   {
+    plan: "home",
     name: "HDM HOME",
     price: "$199",
     period: "/ MONTH",
@@ -130,6 +134,7 @@ export const plans: PlanItem[] = [
     ],
   },
   {
+    plan: "total",
     name: "HDM TOTAL",
     price: "$299",
     period: "/ MONTH",
