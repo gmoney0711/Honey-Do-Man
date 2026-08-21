@@ -298,6 +298,29 @@ input, textarea, select{ font-family:inherit; }
 .jobs-cta{ margin-top:24px; padding:24px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
 .jobs-cta p{ color:var(--muted); font-size:15px; max-width:720px; }
 
+.clean-game-wrap{ display:flex; flex-direction:column; align-items:center; }
+.clean-game-head{ text-align:center; margin-left:auto; margin-right:auto; max-width:760px; }
+.clean-game-board{ position:relative; width:min(1100px, 100%); aspect-ratio:16 / 9; margin:0 auto; overflow:hidden; border-radius:28px; box-shadow:var(--shadow-lift); background:var(--bg-2); touch-action:none; }
+.clean-game-board .house-image,
+.clean-game-board canvas{ position:absolute; inset:0; width:100%; height:100%; }
+.clean-game-board .house-image{ object-fit:cover; object-position:center center; }
+.clean-game-board canvas{ cursor:none; }
+.clean-game-success{ position:absolute; left:50%; bottom:24px; width:min(92%, 700px); transform:translateX(-50%); padding:16px 20px; border-radius:14px; background:rgba(255,255,255,0.94); color:#07110D; font-weight:700; opacity:0; transition:opacity .3s ease, transform .3s ease; box-shadow:0 16px 38px rgba(0,0,0,0.2); }
+.clean-game-success.show{ opacity:1; }
+.clean-game-success a{ color:#2f6b3b; font-weight:800; }
+
+.site-cursor{
+  position:fixed; left:0; top:0; z-index:9999; pointer-events:none; display:none; transform:translate(-50%, -50%);
+  width:24px; height:32px; filter:drop-shadow(0 8px 12px rgba(0,0,0,0.35));
+}
+.site-cursor.is-broom{ width:56px; height:56px; filter:drop-shadow(0 10px 16px rgba(0,0,0,0.35)); }
+.site-cursor-img{ width:100%; height:100%; object-fit:contain; }
+
+@media (hover:hover) and (pointer:fine){
+  body{ cursor:none; }
+  .clean-game-board{ cursor:none; }
+}
+
 .pricing-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; align-items:stretch; }
 .price-card{ padding:36px 30px; display:flex; flex-direction:column; position:relative; }
 .price-card.is-popular{ border-color:var(--accent); background:linear-gradient(160deg, rgba(200,255,50,0.07), rgba(255,255,255,0) 45%), var(--card); transform:translateY(-10px); }
@@ -528,6 +551,7 @@ footer{ padding:64px 0 40px; border-top:1px solid var(--border); }
   .membership-summary, .membership-cards, .membership-benefits-grid{ grid-template-columns:repeat(2,1fr); }
   .membership-exclusions-grid, .membership-final{ grid-template-columns:1fr; }
   .jobs-grid{ grid-template-columns:repeat(2,1fr); }
+  .clean-game-board{ aspect-ratio:4 / 3; }
 }
 @media (max-width:900px){
   .nav-links, .nav-cta-wrap .btn:first-child{ display:none; }
@@ -561,6 +585,10 @@ footer{ padding:64px 0 40px; border-top:1px solid var(--border); }
   .membership-card-top{ padding:26px 20px 22px; }
   .membership-details-inner{ padding-bottom:24px; }
   .membership-table{ min-width:640px; }
+  .clean-game-board{ aspect-ratio:1 / 1.05; border-radius:22px; }
+  .clean-game-success{ font-size:14px; }
+  .site-cursor{ width:24px; height:32px; }
+  .site-cursor.is-broom{ width:48px; height:48px; }
 }
 .timeline-mobile{ display:none; flex-direction:column; gap:10px; margin-top:16px; }
 .timeline-mobile .tm-row{ display:flex; align-items:center; gap:12px; padding:12px 16px; background:var(--card); border:1px solid var(--border); border-radius:12px; font-weight:700; font-size:13.5px; text-transform:uppercase; }

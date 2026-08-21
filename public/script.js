@@ -643,6 +643,234 @@ function renderPastJobs(){
   }).join('');
 }
 
+function initCleanGame(){
+  const section = $('#cleanGame');
+  const board = $('#gameBoard');
+  const canvas = $('#cleanupCanvas');
+  const cursor = $('#siteCursor');
+  const successMessage = $('#successMessage');
+  if (!section || !board || !canvas || !cursor || !successMessage) return;
+
+  const ctx = canvas.getContext('2d', { willReadFrequently: true });
+  if (!ctx) return;
+
+  const cleanImage = board.querySelector('.house-image');
+  const overgrownImage = new Image();
+  overgrownImage.src = '/assets/game/overgrown-house.png';
+  const gloveImage = new Image();
+  gloveImage.src = '/assets/game/cursor-glove.png';
+  const broomImage = new Image();
+  broomImage.src = '/assets/game/cursor-broom.png';
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  let drawing = false;
+  let completed = false;
+  let activeCursor = gloveImage.src;
+  let progressFrame = 0;
+  let progressDirty = false;
+  let overlayCrop = {
+    sx: 0,
+    sy: 0,
+    sw: 0,
+    sh: 0,
+  };
+
+  const setCursor = (src) => {
+    if (activeCursor === src) return;
+    activeCursor = src;
+    cursor.querySelector('img').src = src;
+    cursor.classList.toggle('is-broom', src === broomImage.src);
+  };
+
+  cursor.style.display = canHover ? 'block' : 'none';
+  cursor.querySelector('img').src = gloveImage.src;
+  cursor.classList.remove('is-broom');
+
+  const updateCursor = (event) => {
+    cursor.style.left = `${event.clientX}px`;
+    cursor.style.top = `${event.clientY}px`;
+  };
+
+  const drawCoverImage = (image) => {
+    const width = board.clientWidth;
+    const height = board.clientHeight;
+    const sourceWidth = overlayCrop.sw || image.naturalWidth;
+    const sourceHeight = overlayCrop.sh || image.naturalHeight;
+    const sourceX = overlayCrop.sx || 0;
+    const sourceY = overlayCrop.sy || 0;
+    const scale = Math.max(width / sourceWidth, height / sourceHeight);
+    const drawWidth = sourceWidth * scale;
+    const drawHeight = sourceHeight * scale;
+    const drawX = (width - drawWidth) / 2;
+    const drawY = (height - drawHeight) / 2;
+
+    ctx.clearRect(0, 0, width, height);
+    ctx.drawImage(image, sourceX, sourceY, sourceWidth, sourceHeight, drawX, drawY, drawWidth, drawHeight);
+  };
+
+  const computeOpaqueCrop = (image) => {
+    const probe = document.createElement('canvas');
+    const pctx = probe.getContext('2d', { willReadFrequently: true });
+    if (!pctx) return;
+
+    probe.width = image.naturalWidth;
+    probe.height = image.naturalHeight;
+    pctx.drawImage(image, 0, 0);
+
+    const data = pctx.getImageData(0, 0, probe.width, probe.height).data;
+    let minX = probe.width;
+    let minY = probe.height;
+    let maxX = 0;
+    let maxY = 0;
+    let foundOpaque = false;
+
+    for (let y = 0; y < probe.height; y += 1) {
+      for (let x = 0; x < probe.width; x += 1) {
+        const alpha = data[(y * probe.width + x) * 4 + 3];
+        if (alpha > 8) {
+          foundOpaque = true;
+          if (x < minX) minX = x;
+          if (y < minY) minY = y;
+          if (x > maxX) maxX = x;
+          if (y > maxY) maxY = y;
+        }
+      }
+    }
+
+    if (!foundOpaque) {
+      overlayCrop = { sx: 0, sy: 0, sw: image.naturalWidth, sh: image.naturalHeight };
+      return;
+    }
+
+    overlayCrop = {
+      sx: minX,
+      sy: minY,
+      sw: Math.max(1, maxX - minX + 1),
+      sh: Math.max(1, maxY - minY + 1),
+    };
+  };
+
+  const sizeCanvas = () => {
+    const width = board.clientWidth;
+    const height = board.clientHeight;
+    canvas.width = Math.max(1, Math.round(width * window.devicePixelRatio));
+    canvas.height = Math.max(1, Math.round(height * window.devicePixelRatio));
+    ctx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
+
+    if (cleanImage && cleanImage.complete) {
+      cleanImage.style.opacity = '1';
+    }
+
+    if (overgrownImage.complete) {
+      ctx.globalCompositeOperation = 'source-over';
+      drawCoverImage(overgrownImage);
+    }
+  };
+
+  const getPosition = (event) => {
+    const rect = canvas.getBoundingClientRect();
+    const point = event.touches ? event.touches[0] : event;
+    return {
+      x: point.clientX - rect.left,
+      y: point.clientY - rect.top,
+    };
+  };
+
+  const checkProgress = () => {
+    const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+    let transparentPixels = 0;
+
+    for (let i = 3; i < pixels.length; i += 4) {
+      if (pixels[i] < 30) transparentPixels += 1;
+    }
+
+    const cleanedPercent = transparentPixels / (pixels.length / 4);
+
+    if (cleanedPercent > 0.6) {
+      completed = true;
+      successMessage.classList.add('show');
+      setCursor(gloveImage.src);
+    }
+  };
+
+  const scheduleProgressCheck = () => {
+    if (completed || progressFrame) return;
+    progressFrame = window.requestAnimationFrame(() => {
+      progressFrame = 0;
+      if (!progressDirty || completed) return;
+      progressDirty = false;
+      checkProgress();
+    });
+  };
+
+  const clean = (event) => {
+    if (!drawing || completed) return;
+    const { x, y } = getPosition(event);
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.beginPath();
+    ctx.arc(x, y, reducedMotion ? 56 : 45, 0, Math.PI * 2);
+    ctx.fill();
+    progressDirty = true;
+    scheduleProgressCheck();
+  };
+
+  overgrownImage.onload = () => {
+    computeOpaqueCrop(overgrownImage);
+    sizeCanvas();
+    progressDirty = true;
+    scheduleProgressCheck();
+  };
+
+  window.addEventListener('resize', sizeCanvas);
+  if ('ResizeObserver' in window) {
+    const observer = new ResizeObserver(() => sizeCanvas());
+    observer.observe(board);
+  }
+  if (canHover) {
+    document.addEventListener('pointermove', (event) => {
+      updateCursor(event);
+      if (!section.contains(event.target) && !completed) {
+        setCursor(gloveImage.src);
+      }
+    }, { passive: true });
+  }
+
+  canvas.addEventListener('pointerdown', (event) => {
+    drawing = true;
+    setCursor(broomImage.src);
+    canvas.setPointerCapture(event.pointerId);
+    clean(event);
+  });
+
+  canvas.addEventListener('pointermove', clean);
+  canvas.addEventListener('pointerup', () => { drawing = false; });
+  canvas.addEventListener('pointerleave', () => { drawing = false; });
+
+  section.addEventListener('pointerenter', (event) => {
+    if (canHover) setCursor(broomImage.src);
+    updateCursor(event);
+  });
+
+  section.addEventListener('pointerleave', () => {
+    drawing = false;
+    if (canHover) setCursor(gloveImage.src);
+  });
+
+  section.addEventListener('pointermove', (event) => {
+    if (!canHover) return;
+    updateCursor(event);
+    if (!drawing && !completed) {
+      setCursor(broomImage.src);
+    }
+  });
+
+  board.addEventListener('click', () => {
+    if (completed) {
+      successMessage.classList.add('show');
+    }
+  });
+}
+
 function renderPresale(){
   const wrap = $('#presaleServices');
   if (!wrap) return;
@@ -1013,6 +1241,7 @@ function initSite(){
   renderTestimonials();
   renderFAQ();
   renderEstimateForm();
+  initCleanGame();
 
   initNav();
   initReveal();
