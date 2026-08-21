@@ -283,6 +283,21 @@ input, textarea, select{ font-family:inherit; }
 .service-link{ display:inline-flex; align-items:center; gap:6px; font-weight:700; font-size:14px; color:var(--text); transition:gap .2s ease, color .2s ease; }
 .service-card:hover .service-link{ color:var(--accent); gap:10px; }
 
+.jobs-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.jobs-card{ overflow:hidden; display:flex; flex-direction:column; }
+.jobs-visual{ position:relative; aspect-ratio:16/11; border-bottom:1px solid var(--border); background:linear-gradient(140deg, rgba(200,255,50,0.12), rgba(255,255,255,0.02)); }
+.jobs-visual img{ width:100%; height:100%; object-fit:cover; }
+.jobs-visual-empty{ background:linear-gradient(140deg, rgba(200,255,50,0.09), rgba(244,185,66,0.08)); }
+.jobs-placeholder{ width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; font-family:var(--f-mono); font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted); }
+.jobs-placeholder svg{ width:26px; height:26px; stroke:var(--accent); }
+.jobs-body{ padding:20px 20px 24px; display:flex; flex-direction:column; gap:10px; }
+.jobs-meta{ display:flex; gap:8px; flex-wrap:wrap; }
+.jobs-meta span{ font-family:var(--f-mono); font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; padding:6px 10px; border-radius:100px; border:1px solid var(--border); background:rgba(255,255,255,0.02); color:var(--muted); }
+.jobs-card h3{ font-family:var(--f-display); font-weight:800; font-size:18px; line-height:1.2; text-transform:uppercase; }
+
+.jobs-cta{ margin-top:24px; padding:24px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+.jobs-cta p{ color:var(--muted); font-size:15px; max-width:720px; }
+
 .pricing-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; align-items:stretch; }
 .price-card{ padding:36px 30px; display:flex; flex-direction:column; position:relative; }
 .price-card.is-popular{ border-color:var(--accent); background:linear-gradient(160deg, rgba(200,255,50,0.07), rgba(255,255,255,0) 45%), var(--card); transform:translateY(-10px); }
@@ -512,6 +527,7 @@ footer{ padding:64px 0 40px; border-top:1px solid var(--border); }
   .presale-services{ grid-template-columns:repeat(3,1fr); }
   .membership-summary, .membership-cards, .membership-benefits-grid{ grid-template-columns:repeat(2,1fr); }
   .membership-exclusions-grid, .membership-final{ grid-template-columns:1fr; }
+  .jobs-grid{ grid-template-columns:repeat(2,1fr); }
 }
 @media (max-width:900px){
   .nav-links, .nav-cta-wrap .btn:first-child{ display:none; }
@@ -528,9 +544,10 @@ footer{ padding:64px 0 40px; border-top:1px solid var(--border); }
   .footer-top{ grid-template-columns:1fr 1fr; }
   .membership-summary, .membership-cards, .membership-benefits-grid{ grid-template-columns:1fr; }
   .membership-card.is-featured{ transform:none; }
+  .jobs-cta{ flex-direction:column; align-items:flex-start; }
 }
 @media (max-width:640px){
-  .problem-grid, .services-grid, .pricing-grid, .steps-grid, .testi-grid, .onetime-grid, .presale-services, .why-grid{ grid-template-columns:1fr; }
+  .problem-grid, .services-grid, .pricing-grid, .steps-grid, .testi-grid, .onetime-grid, .presale-services, .why-grid, .jobs-grid{ grid-template-columns:1fr; }
   .ef-option-grid{ grid-template-columns:1fr; }
   .ef-row2, .ef-row3{ grid-template-columns:1fr; }
   .footer-top{ grid-template-columns:1fr 1fr; }

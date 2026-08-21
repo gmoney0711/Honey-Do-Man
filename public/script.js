@@ -255,6 +255,52 @@ const ONE_TIME = [
   { name:'Large Property Projects', price:'Free Estimate' },
 ];
 
+/*
+  PAST JOBS PHOTOS
+  ---------------------------------
+  Add your photo file paths in each image field below.
+  Example path format: /assets/jobs/driveway-before-after.jpg
+  Put the actual image files inside public/assets/jobs/.
+*/
+const PAST_JOBS = [
+  {
+    title: 'Property Cleanup - Before / After',
+    location: '409 Area',
+    type: 'Cleanup',
+    image: '/assets/jobs/property-cleanout-before.jpg',
+  },
+  {
+    title: 'Landscape Refresh - Before / After',
+    location: '409 Area',
+    type: 'Yard + Curb Appeal',
+    image: '/assets/jobs/landscape-before-after.jpg',
+  },
+  {
+    title: 'Driveway Pressure Wash - Before / After',
+    location: '409 Area',
+    type: 'Pressure Washing',
+    image: '/assets/jobs/driveway-before-after.jpg',
+  },
+  {
+    title: 'Garage Cleanout',
+    location: '409 Area',
+    type: 'Cleanout',
+    image: '/assets/jobs/garage-before-after.jpg',
+  },
+  {
+    title: 'Exterior Refresh - Before / After',
+    location: '409 Area',
+    type: 'Pre-Sale Prep',
+    image: '/assets/jobs/exterior-before-after.jpg',
+  },
+  {
+    title: 'Fence Latch Repair',
+    location: '409 Area',
+    type: 'Handyman',
+    image: '/assets/jobs/fence-latch-repair.jpg',
+  },
+];
+
 const PRESALE_SERVICES = ['Yard cleanup','Pressure washing','Trash removal','Minor repairs','Touch-up work','Gutter cleaning','Exterior cleanup','Move-out cleanup'];
 const TOWNS = ['Beaumont','Port Arthur','Nederland','Port Neches','Groves','Orange','Vidor','Lumberton','Silsbee','Bridge City','Kountze','Winnie','Mauriceville'];
 const WHY_HDM = [
@@ -561,6 +607,40 @@ function renderOneTime(){
       <a href="#estimate" class="btn btn-dark">Get an Estimate -></a>
     </div>
   `).join('');
+}
+
+function renderPastJobs(){
+  const grid = $('#pastJobsGrid');
+  if (!grid) return;
+
+  grid.innerHTML = PAST_JOBS.map((job, index) => {
+    const delay = (index % 3) * 70;
+    const visual = job.image
+      ? `
+        <div class="jobs-visual">
+          <img src="${job.image}" alt="${job.type} project in ${job.location}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="jobs-placeholder" style="display:none;">${icon('home')}<span>Add photo</span></div>
+        </div>
+      `
+      : `
+        <div class="jobs-visual jobs-visual-empty">
+          <div class="jobs-placeholder">${icon('home')}<span>Add photo</span></div>
+        </div>
+      `;
+
+    return `
+      <article class="jobs-card ticket" data-reveal style="transition-delay:${delay}ms">
+        ${visual}
+        <div class="jobs-body">
+          <div class="jobs-meta">
+            <span>${job.type}</span>
+            <span>${job.location}</span>
+          </div>
+          <h3>${job.title}</h3>
+        </div>
+      </article>
+    `;
+  }).join('');
 }
 
 function renderPresale(){
@@ -924,6 +1004,7 @@ function resetEstimateForm(){
 
 function initSite(){
   renderServices();
+  renderPastJobs();
   renderMembership();
   renderOneTime();
   renderPresale();
