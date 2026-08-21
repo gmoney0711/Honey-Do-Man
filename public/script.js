@@ -265,37 +265,37 @@ const ONE_TIME = [
 const PAST_JOBS = [
   {
     title: 'Property Cleanup - Before / After',
-    location: '409 Area',
+    location: 'Port Neches',
     type: 'Cleanup',
     image: '/assets/jobs/property-cleanout-before.jpg',
   },
   {
     title: 'Landscape Refresh - Before / After',
-    location: '409 Area',
+    location: 'Port Arthur',
     type: 'Yard + Curb Appeal',
     image: '/assets/jobs/landscape-before-after.jpg',
   },
   {
     title: 'Driveway Pressure Wash - Before / After',
-    location: '409 Area',
+    location: 'Nederland',
     type: 'Pressure Washing',
     image: '/assets/jobs/driveway-before-after.jpg',
   },
   {
     title: 'Garage Cleanout',
-    location: '409 Area',
+    location: 'Beaumont',
     type: 'Cleanout',
     image: '/assets/jobs/garage-before-after.jpg',
   },
   {
     title: 'Exterior Refresh - Before / After',
-    location: '409 Area',
+    location: 'Groves',
     type: 'Pre-Sale Prep',
     image: '/assets/jobs/exterior-before-after.jpg',
   },
   {
     title: 'Fence Latch Repair',
-    location: '409 Area',
+    location: 'Vidor',
     type: 'Handyman',
     image: '/assets/jobs/fence-latch-repair.jpg',
   },
