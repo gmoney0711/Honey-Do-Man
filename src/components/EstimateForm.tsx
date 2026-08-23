@@ -92,7 +92,7 @@ export function EstimateForm() {
 
   const sendByEmailHref = useMemo(
     () =>
-      `mailto:HoneyDoMan.Contact@gmail.com?subject=${encodeURIComponent("New HDM Estimate Request")}&body=${encodeURIComponent(estimateSummary)}`,
+      `mailto:honeydoman.contact@gmail.com?subject=${encodeURIComponent("New HDM Estimate Request")}&body=${encodeURIComponent(estimateSummary)}`,
     [estimateSummary]
   );
 
@@ -144,7 +144,7 @@ export function EstimateForm() {
           <p className="text-xs font-bold tracking-[0.18em] text-hdm-muted">ESTIMATE REQUEST</p>
           <h2 className="mt-4 text-4xl font-black text-hdm-text md:text-5xl">REQUEST RECEIVED.</h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-hdm-muted">
-            Your estimate is ready. Choose one option below to send it now: Send by Text to 346-360-7235 or Send by Email to HoneyDoMan.Contact@gmail.com.
+            Your estimate is ready. Choose one option below to send it now: Send by Text to 346-360-7235 or Send by Email to honeydoman.contact@gmail.com.
           </p>
           <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center">
             <a href={sendByTextHref} className="cta-primary">

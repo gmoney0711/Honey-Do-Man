@@ -345,7 +345,7 @@ const EF_CONTACT = [
 ];
 const EF_TIMES = ['Morning','Afternoon','Evening'];
 const HDM_ESTIMATE_PHONE = '+13463607235';
-const HDM_ESTIMATE_EMAIL = 'honeydoman.service@outlook.com';
+const HDM_ESTIMATE_EMAIL = 'honeydoman.contact@gmail.com';
 
 const $ = (sel, el=document) => el.querySelector(sel);
 const $$ = (sel, el=document) => Array.from(el.querySelectorAll(sel));
@@ -1152,7 +1152,7 @@ function configureEstimateDeliveryLinks(){
 
   const successCopy = $('#efSuccess p');
   if (successCopy) {
-    successCopy.textContent = 'Your estimate is ready. Choose one option below to send it now: Send by Text to 346-360-7235 or Send by Email to honeydoman.service@outlook.com.';
+    successCopy.textContent = 'Your estimate is ready. Choose one option below to send it now: Send by Text to 346-360-7235 or Send by Email to honeydoman.contact@gmail.com.';
   }
 
   const message = formatEstimateSummary();
