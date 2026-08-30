@@ -28,7 +28,7 @@ const ICONS = {
 };
 
 const SERVICES = [
-  { icon:'lawn', name:'Lawn Care', desc:'Mowing, edging and trimming on a schedule your yard can actually keep up with.' },
+  { icon:'ac-filter', name:'Monthly AC Care', desc:'Regular maintenance to keep your air conditioning system running efficiently.' },
   { icon:'spray', name:'Pressure Washing', desc:'Driveways, siding, walkways and patios - restored, not just rinsed.' },
   { icon:'gutter', name:'Gutter Cleaning', desc:'Cleared gutters and downspouts so water goes where it should.' },
   { icon:'broom', name:'Yard Cleanup', desc:'Leaves, debris and overgrowth handled in a single visit.' },
@@ -663,6 +663,9 @@ function initCleanGame(){
   broomImage.src = '/assets/game/cursor-broom.png';
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const progressProbe = document.createElement('canvas');
+  const progressProbeCtx = progressProbe.getContext('2d', { willReadFrequently: true });
+  const progressSampleMax = 128;
   let drawing = false;
   let completed = false;
   let activeCursor = gloveImage.src;
@@ -755,6 +758,14 @@ function initCleanGame(){
     const height = board.clientHeight;
     canvas.width = Math.max(1, Math.round(width * window.devicePixelRatio));
     canvas.height = Math.max(1, Math.round(height * window.devicePixelRatio));
+
+    // Sample progress on a tiny offscreen canvas to avoid expensive full-frame reads.
+    if (progressProbeCtx) {
+      const landscape = width >= height;
+      progressProbe.width = landscape ? progressSampleMax : Math.max(1, Math.round(progressSampleMax * (width / Math.max(1, height))));
+      progressProbe.height = landscape ? Math.max(1, Math.round(progressSampleMax * (height / Math.max(1, width)))) : progressSampleMax;
+    }
+
     ctx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
 
     if (cleanImage && cleanImage.complete) {
@@ -777,7 +788,11 @@ function initCleanGame(){
   };
 
   const checkProgress = () => {
-    const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+    if (!progressProbeCtx || !progressProbe.width || !progressProbe.height) return;
+
+    progressProbeCtx.clearRect(0, 0, progressProbe.width, progressProbe.height);
+    progressProbeCtx.drawImage(canvas, 0, 0, progressProbe.width, progressProbe.height);
+    const pixels = progressProbeCtx.getImageData(0, 0, progressProbe.width, progressProbe.height).data;
     let transparentPixels = 0;
 
     for (let i = 3; i < pixels.length; i += 4) {
@@ -869,6 +884,76 @@ function initCleanGame(){
       successMessage.classList.add('show');
     }
   });
+}
+
+function initBeforeAfterSlider(){
+  const slider = $('#hdmSlider');
+  if (!slider) return;
+
+  let dragging = false;
+  let nextX = 0;
+  let raf = 0;
+  let sliderRect = null;
+
+  const updateSliderRect = () => {
+    sliderRect = slider.getBoundingClientRect();
+  };
+
+  const setPosition = (clientX) => {
+    const rect = sliderRect || slider.getBoundingClientRect();
+    if (!rect.width) return;
+    const ratio = (clientX - rect.left) / rect.width;
+    const clamped = Math.max(0, Math.min(1, ratio));
+    const position = `${(clamped * 100).toFixed(2)}%`;
+    slider.style.setProperty('--hdm-split', position);
+  };
+
+  const schedule = (clientX) => {
+    nextX = clientX;
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      raf = 0;
+      setPosition(nextX);
+    });
+  };
+
+  slider.addEventListener('pointerdown', (event) => {
+    updateSliderRect();
+    dragging = true;
+    slider.setPointerCapture(event.pointerId);
+    schedule(event.clientX);
+  });
+
+  slider.addEventListener('pointermove', (event) => {
+    if (!dragging) return;
+    schedule(event.clientX);
+  });
+
+  const stopDragging = () => {
+    dragging = false;
+    sliderRect = null;
+  };
+  slider.addEventListener('pointerup', stopDragging);
+  slider.addEventListener('pointercancel', stopDragging);
+  slider.addEventListener('pointerleave', stopDragging);
+
+  window.addEventListener('resize', updateSliderRect, { passive: true });
+  if ('ResizeObserver' in window) {
+    const observer = new ResizeObserver(updateSliderRect);
+    observer.observe(slider);
+  }
+
+  slider.addEventListener('keydown', (event) => {
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+    event.preventDefault();
+    const current = parseFloat(slider.style.getPropertyValue('--hdm-split') || '50');
+    const next = event.key === 'ArrowRight' ? current + 3 : current - 3;
+    const clamped = Math.max(0, Math.min(100, next));
+    const position = `${clamped.toFixed(2)}%`;
+    slider.style.setProperty('--hdm-split', position);
+  });
+
+  setPosition(slider.getBoundingClientRect().left + (slider.clientWidth / 2));
 }
 
 function renderPresale(){
@@ -1241,6 +1326,7 @@ function initSite(){
   renderTestimonials();
   renderFAQ();
   renderEstimateForm();
+  initBeforeAfterSlider();
   initCleanGame();
 
   initNav();
