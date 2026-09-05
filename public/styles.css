@@ -488,40 +488,6 @@ input, textarea, select{ font-family:inherit; }
   letter-spacing:0.05em;
   color:#31525a;
 }
-.worker-409-badges{
-  position:absolute;
-  left:22px;
-  right:22px;
-  bottom:26px;
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-}
-.worker-409-badge{
-  width:fit-content;
-  max-width:100%;
-  display:inline-flex;
-  align-items:center;
-  gap:12px;
-  padding:12px 18px;
-  border-radius:999px;
-  background:rgba(255,255,255,0.96);
-  color:#0b2225;
-  box-shadow:0 14px 28px rgba(7,17,13,0.2);
-}
-.worker-409-badge svg{
-  width:28px;
-  height:28px;
-  stroke:#08353a;
-  flex-shrink:0;
-}
-.worker-409-badge span{
-  font-family:var(--f-display);
-  font-size:clamp(20px, 2.6vw, 32px);
-  font-weight:800;
-  line-height:1;
-  letter-spacing:-0.01em;
-}
 
 .site-cursor{
   position:fixed; left:0; top:0; z-index:9999; pointer-events:none; display:none; transform:translate(-50%, -50%);
