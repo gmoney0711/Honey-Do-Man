@@ -98,7 +98,7 @@ input, textarea, select{ font-family:inherit; }
 .accent-text{ color:var(--accent); }
 .amber-text{ color:var(--accent-2); }
 
-.section-head{ max-width:760px; margin-bottom:32px; }
+.section-head{ max-width:760px; margin-bottom:30px; }
 .section-head .eyebrow{ margin-bottom:18px; }
 .section-head h2{ font-size:clamp(32px, 5.2vw, 56px); }
 .section-head p{ color:var(--muted); font-size:clamp(16px,2vw,19px); margin-top:18px; max-width:640px; }
@@ -273,6 +273,9 @@ input, textarea, select{ font-family:inherit; }
 .problem-close{ margin-top:56px; text-align:center; }
 .problem-close h3{ font-family:var(--f-display); font-weight:900; font-size:clamp(26px,4.4vw,44px); line-height:1.15; text-transform:uppercase; }
 .problem-close .line2{ color:var(--accent); }
+
+#services.section{ padding-bottom:clamp(18px, 3vw, 32px); }
+#try-us-once.section{ padding-top:clamp(18px, 3vw, 32px); }
 
 .tryonce-shell{ padding:clamp(22px, 3.5vw, 44px); border-radius:32px; }
 .tryonce-header{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:22px; align-items:stretch; }
