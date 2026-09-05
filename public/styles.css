@@ -274,6 +274,98 @@ input, textarea, select{ font-family:inherit; }
 .problem-close h3{ font-family:var(--f-display); font-weight:900; font-size:clamp(26px,4.4vw,44px); line-height:1.15; text-transform:uppercase; }
 .problem-close .line2{ color:var(--accent); }
 
+.tryonce-shell{ padding:clamp(22px, 3.5vw, 44px); border-radius:32px; }
+.tryonce-header{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:22px; align-items:stretch; }
+.tryonce-copy h2{ font-size:clamp(36px, 5vw, 62px); }
+.tryonce-copy h3{ margin-top:14px; font-family:var(--f-display); font-size:clamp(22px, 3.2vw, 34px); text-transform:uppercase; line-height:1.08; }
+.tryonce-copy p{ margin-top:16px; color:var(--muted); font-size:16px; max-width:700px; }
+.tryonce-ctas{ margin-top:24px; display:flex; flex-wrap:wrap; gap:12px; }
+
+.tryonce-visual{
+  border-radius:24px;
+  border:1px solid var(--border-strong);
+  padding:20px;
+  background:
+    radial-gradient(circle at 20% 10%, var(--accent-dim), transparent 46%),
+    linear-gradient(145deg, rgba(255,255,255,0.04), rgba(255,255,255,0) 45%),
+    var(--bg-2);
+}
+.tryonce-checklist{ display:grid; gap:12px; }
+.tryonce-check{
+  display:flex; align-items:center; gap:10px; padding:12px 14px;
+  border:1px solid var(--border); border-radius:12px; background:rgba(255,255,255,0.02);
+  opacity:0; transform:translateY(12px); animation:try-pop .6s ease forwards;
+}
+.tryonce-check span{ width:20px; height:20px; display:inline-flex; }
+.tryonce-check span svg{ width:100%; height:100%; stroke:var(--accent); }
+.tryonce-check strong{ font-family:var(--f-body); font-size:14.5px; }
+@keyframes try-pop{ to{ opacity:1; transform:translateY(0);} }
+
+.tryonce-directory{ margin-top:28px; }
+.tryonce-directory-head h3{ margin-top:12px; font-size:clamp(28px, 4.2vw, 46px); }
+.tryonce-directory-head p{ margin-top:12px; color:var(--muted); max-width:760px; }
+.tryonce-directory-grid{ margin-top:20px; display:grid; grid-template-columns:1.2fr 0.8fr; gap:20px; align-items:start; }
+
+.tryonce-accordion{ display:grid; gap:12px; }
+.tryonce-cat{ overflow:hidden; }
+.tryonce-cat summary{
+  list-style:none; cursor:pointer; display:grid; grid-template-columns:auto 1fr auto; align-items:center;
+  gap:12px; padding:18px 18px;
+}
+.tryonce-cat summary::-webkit-details-marker{ display:none; }
+.tryonce-cat-icon{ width:20px; height:20px; display:inline-flex; }
+.tryonce-cat-icon svg{ width:100%; height:100%; stroke:var(--accent); }
+.tryonce-cat-title{ font-family:var(--f-display); font-size:19px; text-transform:uppercase; line-height:1; }
+.tryonce-cat-count{ font-family:var(--f-mono); font-size:11px; letter-spacing:0.07em; text-transform:uppercase; color:var(--muted); }
+.tryonce-cat-body{ padding:0 18px 18px; border-top:1px solid var(--border); }
+.tryonce-service-grid{ padding-top:14px; display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:10px; }
+.tryonce-service{
+  text-align:left; padding:11px 12px; border-radius:10px; border:1px solid var(--border);
+  background:rgba(255,255,255,0.015); color:var(--text); font-size:13.5px; font-weight:600;
+  transition:transform .18s ease, border-color .18s ease, background .18s ease;
+}
+.tryonce-service:hover{ transform:translateY(-2px); border-color:var(--accent); }
+.tryonce-service.is-active{ border-color:var(--accent); background:var(--accent-dim); color:var(--accent); }
+.tryonce-note{ margin-top:12px; color:var(--muted); font-size:12.5px; line-height:1.6; }
+
+.tryonce-upsell{ padding:20px; border-radius:18px; }
+.tryonce-upsell h4{ margin-top:10px; font-family:var(--f-display); font-size:24px; text-transform:uppercase; line-height:1.05; }
+.tryonce-upsell p{ margin-top:10px; color:var(--muted); font-size:14px; }
+.tryonce-upsell-list{ margin-top:14px; display:grid; gap:9px; }
+.tryonce-upsell-list label{ display:flex; align-items:center; gap:9px; font-size:14px; font-weight:600; }
+.tryonce-upsell-list input{ accent-color:var(--accent); width:16px; height:16px; }
+.tryonce-upsell .btn{ margin-top:14px; }
+
+.tryonce-specials{ margin-top:22px; display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.tryonce-special{ padding:24px; }
+.tryonce-special h4{ margin-top:12px; font-size:clamp(24px, 3.4vw, 40px); }
+.tryonce-special p{ margin-top:12px; color:var(--muted); font-size:14.5px; }
+.tryonce-special .btn{ margin-top:16px; }
+
+.tryonce-pricing{ margin-top:18px; padding:24px; }
+.tryonce-pricing h4{ margin-top:10px; font-size:clamp(24px, 3.3vw, 40px); }
+.tryonce-pricing p{ margin-top:10px; color:var(--muted); }
+.tryonce-factor-grid{ margin-top:14px; display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:10px; }
+.tryonce-factor{ display:flex; align-items:flex-start; gap:8px; padding:10px; border:1px solid var(--border); border-radius:10px; background:rgba(255,255,255,0.015); font-size:13px; }
+.tryonce-factor svg{ width:14px; height:14px; stroke:var(--accent); flex-shrink:0; margin-top:2px; }
+
+.tryonce-onecall{ margin-top:18px; padding:24px; }
+.tryonce-onecall-head h3{ margin-top:12px; font-size:clamp(28px, 4.2vw, 48px); }
+.tryonce-onecall-head p{ margin-top:12px; color:var(--muted); }
+.tryonce-onecall-grid{ margin-top:16px; display:grid; grid-template-columns:1.15fr 0.85fr; gap:16px; align-items:start; }
+.tryonce-list h4{ font-family:var(--f-mono); letter-spacing:0.08em; font-size:12px; text-transform:uppercase; color:var(--muted); }
+.tryonce-list-grid{ margin-top:10px; display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.tryonce-list-grid label{ display:flex; align-items:center; gap:9px; padding:10px 12px; border:1px solid var(--border); border-radius:10px; font-size:14px; }
+.tryonce-list-grid input{ accent-color:var(--accent); width:16px; height:16px; }
+.tryonce-onecall-cta .btn{ width:100%; min-height:56px; }
+
+.tryonce-final{ margin-top:18px; padding:28px; text-align:center; }
+.tryonce-final h3{ font-size:clamp(30px, 4.4vw, 58px); }
+.tryonce-final p{ margin-top:12px; color:var(--muted); font-size:17px; }
+.tryonce-final .tryonce-ctas{ justify-content:center; }
+
+.tryonce-mobile-cta{ display:none; }
+
 .services-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
 .service-card{ padding:30px; display:flex; flex-direction:column; gap:16px; transition:transform .3s ease, border-color .3s ease, background .3s ease; }
 .service-card:hover{ transform:translateY(-6px); border-color:var(--accent); }
@@ -751,6 +843,9 @@ footer{ padding:64px 0 40px; border-top:1px solid var(--border); }
 .footer-bottom{ margin-top:52px; padding-top:24px; border-top:1px solid var(--border); display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; font-size:13px; color:var(--muted); }
 
 @media (max-width:1080px){
+  .tryonce-header, .tryonce-directory-grid, .tryonce-onecall-grid{ grid-template-columns:1fr; }
+  .tryonce-specials{ grid-template-columns:1fr; }
+  .tryonce-factor-grid{ grid-template-columns:repeat(2, minmax(0,1fr)); }
   .why-grid{ grid-template-columns:repeat(3,1fr); }
   .onetime-grid{ grid-template-columns:repeat(3,1fr); }
   .presale-services{ grid-template-columns:repeat(3,1fr); }
@@ -763,6 +858,15 @@ footer{ padding:64px 0 40px; border-top:1px solid var(--border); }
   .worker-409-media{ min-height:500px; }
 }
 @media (max-width:900px){
+  .tryonce-shell{ padding:18px; }
+  .tryonce-copy h2{ font-size:44px; }
+  .tryonce-copy h3{ font-size:26px; }
+  .tryonce-service-grid, .tryonce-list-grid{ grid-template-columns:1fr; }
+  .tryonce-mobile-cta{
+    display:block; position:sticky; bottom:10px; z-index:20; margin-top:14px;
+    padding-bottom:calc(8px + env(safe-area-inset-bottom));
+  }
+  .tryonce-mobile-cta .btn{ width:100%; }
   .nav-links, .nav-cta-wrap .btn:first-child{ display:none; }
   .menu-btn{ display:flex; }
   .mobile-panel{ display:block; }
@@ -783,6 +887,13 @@ footer{ padding:64px 0 40px; border-top:1px solid var(--border); }
   .worker-409-badges{ left:14px; right:14px; bottom:18px; gap:10px; }
 }
 @media (max-width:640px){
+  .tryonce-factor-grid{ grid-template-columns:1fr; }
+  .tryonce-shell{ border-radius:20px; }
+  .tryonce-copy h2{ font-size:38px; }
+  .tryonce-copy h3{ font-size:22px; }
+  .tryonce-final h3{ font-size:34px; }
+  .tryonce-ctas{ flex-direction:column; }
+  .tryonce-ctas .btn{ width:100%; }
   .problem-grid, .services-grid, .pricing-grid, .steps-grid, .testi-grid, .onetime-grid, .presale-services, .why-grid, .jobs-grid{ grid-template-columns:1fr; }
   .ef-option-grid{ grid-template-columns:1fr; }
   .ef-row2, .ef-row3{ grid-template-columns:1fr; }

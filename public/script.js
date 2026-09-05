@@ -255,6 +255,210 @@ const ONE_TIME = [
   { name:'Large Property Projects', price:'Free Estimate' },
 ];
 
+const TRY_US_ONCE = {
+  heroChecklist: [
+    'Fence fixed',
+    'Driveway cleaned',
+    'Light fixture replaced',
+    'TV mounted',
+    'Yard cleanup complete',
+  ],
+  categories: [
+    {
+      id: 'general-handyman',
+      title: 'GENERAL HANDYMAN',
+      icon: 'wrench',
+      services: [
+        'Furniture assembly', 'Shelving installation', 'Picture/mirror hanging', 'Curtain/blind installation', 'TV mounting',
+        'Cabinet hardware', 'Cabinet adjustments', 'Caulking', 'Weather stripping', 'Minor trim repair',
+        'Baseboard repair', 'Door adjustments', 'Door hardware', 'Lock replacement', 'Screen repair',
+        'Minor drywall repair', 'Small holes/patches', 'Minor paint touch-ups', 'Grab bar installation', 'Handrail installation',
+        'Closet organization', 'Garage organization', 'General Honey-Do lists',
+      ],
+    },
+    {
+      id: 'yard-outdoor',
+      title: 'YARD & OUTDOOR',
+      icon: 'broom',
+      services: [
+        'Lawn cleanup', 'Leaf cleanup', 'Brush cleanup', 'Weed removal', 'Flower bed cleanup', 'Mulch installation',
+        'Plant installation', 'Shrub trimming', 'Hedge trimming', 'Bush removal', 'Small tree trimming', 'Small tree removal',
+        'Storm debris cleanup', 'Yard waste removal', 'Fence-line cleanup', 'Outdoor furniture assembly',
+        'Outdoor fixture installation', 'Garden bed preparation',
+      ],
+    },
+    {
+      id: 'tree-landscape',
+      title: 'TREE & LANDSCAPE',
+      icon: 'lawn',
+      services: [
+        'Tree trimming', 'Branch removal', 'Small tree removal', 'Dead branch removal', 'Storm-damaged limb cleanup',
+        'Shrub trimming', 'Hedge trimming', 'Bush removal', 'Overgrowth cleanup', 'Small stump cleanup/removal where legally/equipment appropriate',
+        'Landscape cleanup', 'Bed edging', 'Mulch', 'Rock installation', 'Basic drainage improvements',
+      ],
+      note: 'Larger or hazardous tree work may require a qualified tree-service partner.',
+    },
+    {
+      id: 'pressure-washing',
+      title: 'PRESSURE WASHING',
+      icon: 'spray',
+      services: [
+        'Driveways', 'Sidewalks', 'Walkways', 'Patios', 'Porches', 'Pool decks', 'Fences', 'Exterior walls',
+        'Outdoor furniture', 'Trash cans', 'Garage floors', 'House wash', 'Mold/algae buildup', 'Surface cleaning', 'Pre-sale exterior cleanup',
+      ],
+    },
+    {
+      id: 'home-exterior',
+      title: 'HOME EXTERIOR',
+      icon: 'home',
+      services: [
+        'Fence repair', 'Fence staining', 'Gate repair', 'Gate hardware', 'Deck cleaning', 'Deck staining', 'Porch repair',
+        'Minor siding repair', 'Exterior caulking', 'Weather stripping', 'Exterior fixture replacement', 'Mailbox installation',
+        'House numbers', 'Outdoor lighting fixture replacement', 'Gutter cleaning', 'Downspout cleanup', 'Minor drainage improvements',
+      ],
+    },
+    {
+      id: 'interior-repairs',
+      title: 'INTERIOR REPAIRS',
+      icon: 'home',
+      services: [
+        'Drywall patches', 'Hole repair', 'Paint touch-ups', 'Shelving installation', 'Furniture assembly', 'TV mounting',
+        'Mirror hanging', 'Picture hanging', 'Curtain rods', 'Blinds', 'Interior doors', 'Door knobs', 'Door adjustments',
+        'Basic flooring repair where appropriate',
+      ],
+    },
+    {
+      id: 'painting-drywall',
+      title: 'PAINTING & DRYWALL',
+      icon: 'tag',
+      services: [
+        'Room painting', 'Accent walls', 'Trim painting', 'Baseboards', 'Crown molding', 'Door painting',
+        'Cabinet painting', 'Minor drywall repair', 'Small holes/patches', 'Minor paint touch-ups',
+      ],
+    },
+    {
+      id: 'doors-windows',
+      title: 'DOORS & WINDOWS',
+      icon: 'home',
+      services: [
+        'Door adjustments', 'Door hardware', 'Lock replacement', 'Weather stripping', 'Screen repair', 'Interior doors',
+        'Exterior door tune-up', 'Basic window/screen adjustments',
+      ],
+    },
+    {
+      id: 'fences-gates',
+      title: 'FENCES & GATES',
+      icon: 'box',
+      services: ['Fence repair', 'Fence staining', 'Gate repair', 'Gate hardware', 'Fence-line cleanup', 'Brush removal around fence lines'],
+    },
+    {
+      id: 'decks-porches',
+      title: 'DECKS & PORCHES',
+      icon: 'home',
+      services: ['Deck cleaning', 'Deck staining', 'Porch repair', 'Porch cleanup', 'Pressure washing prep/finish'],
+    },
+    {
+      id: 'basic-plumbing',
+      title: 'BASIC PLUMBING',
+      icon: 'gutter',
+      services: [
+        'Faucet replacement', 'Showerhead replacement', 'Toilet hardware replacement', 'Toilet seat replacement',
+        'Supply-line replacement', 'Minor leak troubleshooting', 'Caulking around fixtures', 'Sink hardware',
+        'Garbage disposal replacement if legally permitted', 'Basic fixture replacement',
+      ],
+      note: 'Some plumbing work requires a licensed plumber. If your project falls outside our scope, we\'ll help identify the right professional.',
+    },
+    {
+      id: 'basic-electrical',
+      title: 'BASIC ELECTRICAL',
+      icon: 'star',
+      services: [
+        'Light fixture replacement', 'Ceiling fan replacement', 'Switch replacement', 'Outlet replacement',
+        'Smoke detector replacement', 'Battery replacement', 'Basic troubleshooting',
+      ],
+      note: 'Electrical work requiring a licensed electrician will be referred to the appropriate professional.',
+    },
+    {
+      id: 'hvac-filter-maintenance',
+      title: 'HVAC FILTER & BASIC MAINTENANCE',
+      icon: 'home',
+      services: [
+        'HVAC filter replacement', 'Filter subscription/reminders', 'Basic visual inspection', 'Condenser-area cleanup where appropriate',
+        'Thermostat battery replacement', 'Basic homeowner maintenance reminders',
+      ],
+      note: 'If HVAC repair requires licensing, HDM coordinates or refers the work to qualified professionals.',
+    },
+    {
+      id: 'gutters-drainage',
+      title: 'GUTTERS & DRAINAGE',
+      icon: 'gutter',
+      services: ['Gutter cleaning', 'Downspout cleanup', 'Minor drainage improvements', 'Yard runoff channel cleanup', 'Debris removal around drainage paths'],
+    },
+    {
+      id: 'cleanup-haulaway',
+      title: 'CLEANUP & HAUL-AWAY',
+      icon: 'box',
+      services: [
+        'Garage cleanup', 'Attic cleanup', 'Shed cleanup', 'Storage-area cleanup', 'Yard debris', 'Storm debris',
+        'Furniture removal', 'Appliance removal where legally/logistically appropriate', 'Move-out cleanup', 'Estate cleanup',
+        'Donation drop-off coordination', 'Junk removal', 'Construction debris cleanup', 'Property cleanup',
+      ],
+      note: 'Pricing depends on volume, weight, disposal requirements, labor, and access.',
+    },
+    {
+      id: 'move-in-move-out',
+      title: 'MOVE-IN / MOVE-OUT',
+      icon: 'doc',
+      services: ['Move-out cleanup', 'Junk removal', 'Wall patching', 'Paint touch-ups', 'Yard cleanup', 'Pressure washing', 'Minor repairs', 'Final readiness checklist'],
+    },
+    {
+      id: 'pre-sale-home-prep',
+      title: 'PRE-SALE HOME PREP',
+      icon: 'tag',
+      services: ['Punch-list repairs', 'Paint touch-ups', 'Pressure washing', 'Yard cleanup', 'Fence repairs', 'Door adjustments', 'Hardware replacement', 'Caulking', 'Minor drywall repair', 'Curb-appeal cleanup', 'Debris removal', 'Final walkthrough list'],
+    },
+    {
+      id: 'rental-investment',
+      title: 'RENTAL / INVESTMENT PROPERTY MAINTENANCE',
+      icon: 'doc',
+      services: ['Turnover punch lists', 'Move-out resets', 'Routine maintenance visits', 'Exterior upkeep', 'Minor repairs', 'Property condition photo updates'],
+    },
+    {
+      id: 'inherited-estate-cleanup',
+      title: 'INHERITED PROPERTY / ESTATE CLEANUP',
+      icon: 'doc',
+      services: ['Property cleanup', 'Yard cleanup', 'Trash/debris removal', 'Minor repairs', 'Pressure washing', 'Lock changes', 'Basic property checks', 'Pre-sale preparation', 'Contractor coordination', 'Maintenance planning'],
+    },
+    {
+      id: 'seasonal-home-maintenance',
+      title: 'SEASONAL HOME MAINTENANCE',
+      icon: 'clock',
+      services: ['Seasonal filter changes', 'Storm season prep', 'Holiday lighting help', 'Seasonal exterior cleanup', 'Home checkup checklist updates'],
+    },
+  ],
+  upsells: {
+    'tree-landscape': ['Yard cleanup', 'Brush removal', 'Haul-away', 'Fence-line cleanup', 'Pressure washing', 'Gutter cleaning'],
+    'pressure-washing': ['Clean driveway', 'Clean sidewalks', 'Clean patio', 'Clean fence', 'Clean outdoor furniture', 'Clean trash cans', 'Gutter cleaning', 'Yard cleanup'],
+    'painting-drywall': ['Drywall repair', 'Caulking', 'Trim repair', 'Door hardware', 'Light fixture replacement', 'Shelving installation'],
+    'fences-gates': ['Gate repair', 'Yard cleanup', 'Brush removal', 'Pressure washing', 'Staining/sealing'],
+    'move-in-move-out': ['Junk removal', 'Wall patching', 'Paint touch-ups', 'Deep cleanup', 'Yard cleanup', 'Pressure washing', 'Minor repairs'],
+    'inherited-estate-cleanup': ['Estate cleanup', 'Yard cleanup', 'Lock changes', 'Pressure washing', 'Minor repairs', 'Pre-sale preparation', 'Ongoing property care'],
+    'gutters-drainage': ['Downspout cleanup', 'Pressure washing', 'Roofline visual inspection', 'Exterior cleanup', 'Yard debris cleanup'],
+  },
+  pricingModel: {
+    description: 'Transparent estimate architecture. Final pricing is built from these configurable factors.',
+    factors: [
+      'Base service', 'Minimum service charge', 'Labor', 'Materials', 'Disposal', 'Equipment', 'Height/access difficulty',
+      'Distance/travel', 'Emergency/priority service', 'After-hours', 'Additional quantity', 'Additional rooms/areas',
+      'Additional linear feet', 'Additional square footage', 'Additional labor hours', 'Specialist subcontractor', 'Permit/inspection costs where applicable',
+    ],
+  },
+  oneCallChecklist: [
+    'Fix the fence', 'Trim the bushes', 'Clean the driveway', 'Replace the light fixture', 'Fix the door',
+    'Hang the TV', 'Clean the gutters', 'Remove junk', 'Patch the wall', 'Paint the room', 'Something else',
+  ],
+};
+
 /*
   PAST JOBS PHOTOS
   ---------------------------------
@@ -406,6 +610,94 @@ function renderServices(){
       <a href="#estimate" class="service-link">Learn More ${icon('arrow')}</a>
     </div>
   `).join('');
+}
+
+function renderTryUsOnce(){
+  const checklist = $('#tryonceChecklist');
+  const accordion = $('#tryonceAccordion');
+  const upsell = $('#tryonceUpsell');
+  const specials = $('#tryonceSpecials');
+  const pricing = $('#tryoncePricing');
+  const oneCall = $('#tryonceOneCallList');
+  if (!checklist || !accordion || !upsell || !specials || !pricing || !oneCall) return;
+
+  checklist.innerHTML = TRY_US_ONCE.heroChecklist.map((item, idx) => `
+    <div class="tryonce-check" style="transition-delay:${idx * 70}ms">
+      <span>${icon('check')}</span>
+      <strong>${item}</strong>
+    </div>
+  `).join('');
+
+  accordion.innerHTML = TRY_US_ONCE.categories.map((cat, idx) => `
+    <details class="tryonce-cat ticket" ${idx === 0 ? 'open' : ''} data-cat="${cat.id}" data-reveal>
+      <summary>
+        <span class="tryonce-cat-icon">${icon(cat.icon || 'wrench')}</span>
+        <span class="tryonce-cat-title">${cat.title}</span>
+        <span class="tryonce-cat-count">${cat.services.length} services</span>
+      </summary>
+      <div class="tryonce-cat-body">
+        <div class="tryonce-service-grid">
+          ${cat.services.map((service) => `<button type="button" class="tryonce-service js-try-service" data-cat="${cat.id}" data-service="${service}">${service}</button>`).join('')}
+        </div>
+        ${cat.note ? `<p class="tryonce-note">${cat.note}</p>` : ''}
+      </div>
+    </details>
+  `).join('');
+
+  const renderUpsell = (categoryId, selectedService) => {
+    const related = TRY_US_ONCE.upsells[categoryId] || ['Yard cleanup', 'Pressure washing', 'Minor repairs', 'Property cleanup'];
+    upsell.innerHTML = `
+      <span class="eyebrow muted">While we\'re already there...</span>
+      <h4>${selectedService ? selectedService : 'Select a service to see smart bundles'}</h4>
+      <p>Bundle multiple exterior services into one visit.</p>
+      <div class="tryonce-upsell-list">
+        ${related.map((item) => `<label><input type="checkbox" /> <span>${item}</span></label>`).join('')}
+      </div>
+      <p class="tryonce-note">No hidden fees. We\'ll explain scope and pricing factors before work begins.</p>
+      <a href="#estimate" class="btn btn-primary btn-block">BUILD MY SERVICE VISIT -></a>
+    `;
+  };
+
+  renderUpsell('pressure-washing', 'Pressure Washing');
+
+  $$('.js-try-service', accordion).forEach((btn) => {
+    btn.addEventListener('click', () => {
+      $$('.js-try-service', accordion).forEach((el) => el.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      renderUpsell(btn.dataset.cat, btn.dataset.service);
+    });
+  });
+
+  specials.innerHTML = `
+    <article class="tryonce-special ticket" data-reveal>
+      <span class="eyebrow amber">Pre-sale home prep</span>
+      <h4 class="h-display">Get Your Home Ready To Sell</h4>
+      <p>Punch-list repairs, pressure washing, curb-appeal cleanup, and final walkthrough support in one coordinated plan.</p>
+      <a href="#estimate" class="btn btn-primary">MAKE MY HOUSE MARKET-READY -></a>
+    </article>
+    <article class="tryonce-special ticket" data-reveal>
+      <span class="eyebrow amber">Estate support</span>
+      <h4 class="h-display">Inherited A Property?</h4>
+      <p>Don\'t let an inherited home become another full-time job. We can clean up, maintain, prepare for sale, and coordinate specialist work.</p>
+      <a href="#estimate" class="btn btn-primary">HELP ME GET THE PROPERTY HANDLED -></a>
+    </article>
+  `;
+
+  pricing.innerHTML = `
+    <span class="eyebrow muted">Transparent pricing framework</span>
+    <h4 class="h-display">Configured Once. Applied Clearly.</h4>
+    <p>${TRY_US_ONCE.pricingModel.description}</p>
+    <div class="tryonce-factor-grid">
+      ${TRY_US_ONCE.pricingModel.factors.map((factor) => `<div class="tryonce-factor">${icon('check')}<span>${factor}</span></div>`).join('')}
+    </div>
+  `;
+
+  oneCall.innerHTML = `
+    <h4>MY HONEY-DO LIST:</h4>
+    <div class="tryonce-list-grid">
+      ${TRY_US_ONCE.oneCallChecklist.map((item) => `<label><input type="checkbox" /> <span>${item}</span></label>`).join('')}
+    </div>
+  `;
 }
 
 function renderMembership(){
@@ -1372,6 +1664,7 @@ function resetEstimateForm(){
 }
 
 function initSite(){
+  renderTryUsOnce();
   renderServices();
   renderPastJobs();
   renderMembership();
