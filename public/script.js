@@ -661,6 +661,7 @@ function initCleanGame(){
   gloveImage.src = '/assets/game/cursor-glove.png';
   const broomImage = new Image();
   broomImage.src = '/assets/game/cursor-broom.png';
+  const cursorImage = cursor.querySelector('img');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   const progressProbe = document.createElement('canvas');
@@ -670,6 +671,14 @@ function initCleanGame(){
   let completed = false;
   let activeCursor = gloveImage.src;
   let progressFrame = 0;
+  let cursorX = 0;
+  let cursorY = 0;
+  let cursorTargetX = 0;
+  let cursorTargetY = 0;
+  let cursorCurrentX = 0;
+  let cursorCurrentY = 0;
+  let cursorFrame = 0;
+  let cursorSettledFrame = 0;
   let progressDirty = false;
   let overlayCrop = {
     sx: 0,
@@ -681,17 +690,55 @@ function initCleanGame(){
   const setCursor = (src) => {
     if (activeCursor === src) return;
     activeCursor = src;
-    cursor.querySelector('img').src = src;
+    cursorImage.src = src;
     cursor.classList.toggle('is-broom', src === broomImage.src);
   };
 
   cursor.style.display = canHover ? 'block' : 'none';
-  cursor.querySelector('img').src = gloveImage.src;
+  cursorImage.src = gloveImage.src;
   cursor.classList.remove('is-broom');
 
+  const renderCursor = () => {
+    cursorFrame = 0;
+
+    if (!canHover) return;
+
+    const deltaX = cursorTargetX - cursorCurrentX;
+    const deltaY = cursorTargetY - cursorCurrentY;
+    cursorCurrentX += deltaX * 0.22;
+    cursorCurrentY += deltaY * 0.22;
+
+    cursor.style.display = 'block';
+    cursor.style.transform = `translate3d(${cursorCurrentX}px, ${cursorCurrentY}px, 0) translate3d(-50%, -50%, 0)`;
+
+    const settled = Math.abs(deltaX) + Math.abs(deltaY) < 0.15;
+    if (settled) {
+      cursorSettledFrame += 1;
+      if (cursorSettledFrame > 2) {
+        cursorCurrentX = cursorTargetX;
+        cursorCurrentY = cursorTargetY;
+        cursor.style.transform = `translate3d(${cursorCurrentX}px, ${cursorCurrentY}px, 0) translate3d(-50%, -50%, 0)`;
+        return;
+      }
+    } else {
+      cursorSettledFrame = 0;
+    }
+
+    cursorFrame = window.requestAnimationFrame(renderCursor);
+  };
+
+  const scheduleCursorRender = () => {
+    if (!canHover || cursorFrame) return;
+    cursorFrame = window.requestAnimationFrame(renderCursor);
+  };
+
   const updateCursor = (event) => {
-    cursor.style.left = `${event.clientX}px`;
-    cursor.style.top = `${event.clientY}px`;
+    cursorX = event.clientX;
+    cursorY = event.clientY;
+    cursorTargetX = cursorX;
+    cursorTargetY = cursorY;
+    if (!canHover) return;
+    scheduleCursorRender();
   };
 
   const drawCoverImage = (image) => {
@@ -801,7 +848,7 @@ function initCleanGame(){
 
     const cleanedPercent = transparentPixels / (pixels.length / 4);
 
-    if (cleanedPercent > 0.6) {
+    if (cleanedPercent >= 0.999) {
       completed = true;
       successMessage.classList.add('show');
       setCursor(gloveImage.src);
@@ -848,6 +895,12 @@ function initCleanGame(){
         setCursor(gloveImage.src);
       }
     }, { passive: true });
+
+    document.addEventListener('pointerleave', () => {
+      cursor.style.display = 'none';
+      cursorFrame = 0;
+      cursorSettledFrame = 0;
+    }, { passive: true });
   }
 
   canvas.addEventListener('pointerdown', (event) => {
@@ -869,6 +922,9 @@ function initCleanGame(){
   section.addEventListener('pointerleave', () => {
     drawing = false;
     if (canHover) setCursor(gloveImage.src);
+    cursor.style.display = 'none';
+    cursorFrame = 0;
+    cursorSettledFrame = 0;
   });
 
   section.addEventListener('pointermove', (event) => {
@@ -877,7 +933,7 @@ function initCleanGame(){
     if (!drawing && !completed) {
       setCursor(broomImage.src);
     }
-  });
+  }, { passive: true });
 
   board.addEventListener('click', () => {
     if (completed) {
