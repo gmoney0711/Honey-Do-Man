@@ -700,6 +700,29 @@ function renderTryUsOnce(){
   `;
 }
 
+function ensureTryUsOnceHydrated(){
+  const section = $('#try-us-once');
+  if (!section) return;
+
+  const checklist = $('#tryonceChecklist');
+  const accordion = $('#tryonceAccordion');
+  const specials = $('#tryonceSpecials');
+  const pricing = $('#tryoncePricing');
+  const oneCall = $('#tryonceOneCallList');
+
+  const missing = (
+    !checklist || checklist.children.length === 0 ||
+    !accordion || accordion.children.length === 0 ||
+    !specials || specials.children.length === 0 ||
+    !pricing || (pricing.textContent || '').trim().length < 20 ||
+    !oneCall || (oneCall.textContent || '').trim().length < 20
+  );
+
+  if (missing) {
+    renderTryUsOnce();
+  }
+}
+
 function renderMembership(){
   const summary = $('#membershipSummary');
   if (summary) {
@@ -872,11 +895,12 @@ async function onCheckoutClick(e){
     });
 
     const data = await res.json();
-    if (!res.ok || !data?.url) {
-      throw new Error(data?.error || 'Unable to start checkout.');
+    const checkoutUrl = data && data.url ? data.url : '';
+    if (!res.ok || !checkoutUrl) {
+      throw new Error((data && data.error) ? data.error : 'Unable to start checkout.');
     }
 
-    window.location.href = data.url;
+    window.location.href = checkoutUrl;
   } catch (err) {
     btn.classList.remove('is-loading');
     btn.disabled = false;
@@ -1555,8 +1579,10 @@ function showStep(n){
 }
 
 function formatEstimateSummary(){
-  const need = EF_NEEDS.find((item) => item.key === efState.need)?.label || 'Not provided';
-  const contact = EF_CONTACT.find((item) => item.key === efState.contact)?.label || 'Not provided';
+  const needEntry = EF_NEEDS.find((item) => item.key === efState.need);
+  const contactEntry = EF_CONTACT.find((item) => item.key === efState.contact);
+  const need = needEntry ? needEntry.label : 'Not provided';
+  const contact = contactEntry ? contactEntry.label : 'Not provided';
   const photos = efState.photos.length ? efState.photos.join(', ') : 'None';
 
   return [
@@ -1681,6 +1707,10 @@ function initSite(){
   initNav();
   initReveal();
   initAreaCountTrigger();
+
+  ensureTryUsOnceHydrated();
+  window.setTimeout(ensureTryUsOnceHydrated, 250);
+  window.addEventListener('pageshow', ensureTryUsOnceHydrated);
 
   const backToHome = $('#backToHome');
   if (backToHome) backToHome.addEventListener('click', () => resetEstimateForm());

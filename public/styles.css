@@ -886,6 +886,32 @@ footer{ padding:64px 0 40px; border-top:1px solid var(--border); }
   .worker-409-media{ min-height:460px; }
   .worker-409-badges{ left:14px; right:14px; bottom:18px; gap:10px; }
 }
+
+/* iPhone Safari can clip nested <details> content when combined with custom clip-path cards. */
+@media (max-width:900px) and (hover: none) and (pointer: coarse){
+  .tryonce-shell.ticket,
+  .tryonce-cat.ticket,
+  .tryonce-special.ticket,
+  .tryonce-pricing.ticket,
+  .tryonce-onecall.ticket,
+  .tryonce-final.ticket,
+  .tryonce-upsell.ticket{
+    clip-path:none;
+    border-radius:20px;
+  }
+
+  .tryonce-shell.ticket::after,
+  .tryonce-cat.ticket::after,
+  .tryonce-special.ticket::after,
+  .tryonce-pricing.ticket::after,
+  .tryonce-onecall.ticket::after,
+  .tryonce-final.ticket::after,
+  .tryonce-upsell.ticket::after{
+    clip-path:none;
+    border-radius:20px;
+  }
+}
+
 @media (max-width:640px){
   .tryonce-factor-grid{ grid-template-columns:1fr; }
   .tryonce-shell{ border-radius:20px; }
